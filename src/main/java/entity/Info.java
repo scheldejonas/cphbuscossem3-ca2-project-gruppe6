@@ -5,7 +5,7 @@ import java.util.List;
 
 @Entity
 @Inheritance
-public abstract class Info
+public class Info
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,6 @@ public abstract class Info
 
     public Info()
     {
-
     }
 
     public int getId()

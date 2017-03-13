@@ -3,7 +3,6 @@ package entity;
 import javax.persistence.*;
 import java.util.List;
 
-
 @Entity
 public class Phone
 {
@@ -15,10 +14,8 @@ public class Phone
     @ManyToOne
     private Info info;
 
-
     public Phone()
     {
-
     }
 
     public Phone(String number, String description) {
@@ -26,43 +23,35 @@ public class Phone
         this.description = description;
     }
 
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 
-    public void setId(int id)
-    {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getNumber()
-    {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(String number)
-    {
+    public void setNumber(String number) {
         this.number = number;
     }
 
-    public String getDescription()
-    {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description)
-    {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public Info getInfo()
-    {
+    public Info getInfo() {
         return info;
     }
 
-    public void setInfo(Info info)
-    {
+    public void setInfo(Info info) {
         this.info = info;
     }
 }

@@ -12,15 +12,14 @@ public class Address
     private int id;
     private String street, additionalInfo;
 
-    @OneToMany(mappedBy = ("address"))
+    @OneToMany(mappedBy = "address")
     private List<Info> infos;
 
     @ManyToOne
     private CityInfo cityInfo;
 
-    public Address(String street)
+    public Address()
     {
-
     }
 
     public int getId()
@@ -61,5 +60,13 @@ public class Address
     public void setCityInfo(CityInfo cityInfo)
     {
         this.cityInfo = cityInfo;
+    }
+
+    public List<Info> getInfos() {
+        return infos;
+    }
+
+    public void setInfos(List<Info> infos) {
+        this.infos = infos;
     }
 }

@@ -7,13 +7,11 @@ import javax.persistence.*;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class Company extends Info
 {
-
     private int numEmployees, marketValue;
     private String name, description, cvr;
 
     public Company()
     {
-
     }
 
     public int getNumEmployees()
@@ -65,4 +63,5 @@ public class Company extends Info
     {
         this.cvr = cvr;
     }
+
 }

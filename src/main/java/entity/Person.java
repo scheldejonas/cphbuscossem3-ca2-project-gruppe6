@@ -9,43 +9,37 @@ import java.util.List;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class Person extends Info
 {
-    private String firstName, lastName;
+    private String firstName;
+    private String lastName;
 
     @ManyToMany(mappedBy="people")
-    List<Hobby> hobbies;
+    private List<Hobby> hobbies = new ArrayList<>();
 
     public Person()
     {
-
     }
 
-    public String getFirstName()
-    {
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName)
-    {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getLastName()
-    {
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName)
-    {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public List<Hobby> getHobbies()
-    {
+    public List<Hobby> getHobbies() {
         return hobbies;
     }
 
-    public void setHobbies(ArrayList<Hobby> hobbies)
-    {
+    public void setHobbies(List<Hobby> hobbies) {
         this.hobbies = hobbies;
     }
 }

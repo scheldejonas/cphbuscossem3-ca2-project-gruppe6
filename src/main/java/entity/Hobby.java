@@ -14,50 +14,41 @@ public class Hobby
     private String name, description;
 
     @ManyToMany
-    List<Person> people;
+    private List<Person> people;
 
     public Hobby()
     {
-
     }
 
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 
-    public void setId(int id)
-    {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getDescription()
-    {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description)
-    {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public List<Person> getPeople()
-    {
+    public List<Person> getPeople() {
         return people;
     }
 
-    public void setPeople(ArrayList<Person> people)
-    {
+    public void setPeople(List<Person> people) {
         this.people = people;
     }
 }
