@@ -8,7 +8,7 @@ import java.util.Set;
  * @author Thomas Hartmann - tha@cphbusiness.dk created on Mar 6, 2017 
  */
 @javax.ws.rs.ApplicationPath("api")
-public class ApplicationConfig extends Application {
+public class ApiConfig extends Application {
 
     @Override
     public Set<Class<?>> getClasses() {
