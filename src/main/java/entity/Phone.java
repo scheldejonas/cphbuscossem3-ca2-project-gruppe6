@@ -13,7 +13,11 @@ public class Phone
 
     public Phone()
     {
+    }
 
+    public Phone(String number, String description) {
+        this.number = number;
+        this.description = description;
     }
 
     public int getId()
