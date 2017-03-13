@@ -13,7 +13,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-
 @Path("persons")
 public class PersonResource {
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -23,18 +22,6 @@ public class PersonResource {
     private UriInfo context;
 
     public PersonResource() {
-    }
-
-    @GET
-    @Path("/{personId}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getOnePersonFromId(@PathParam("personId") String personIdString){
-        Long phoneId = Long.parseLong(personIdString);
-        return Response
-                .status(200)
-                .header("Content-Type", "application/json")
-                .entity(gson.toJson(PersonDao.getSingleton().findById(phoneId), Phone.class))
-                .build();
     }
 
     @GET
@@ -52,4 +39,16 @@ public class PersonResource {
                 .build();
     }
 
+    @GET
+    @Path("/{personId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOnePersonFromId(@PathParam("personId") String personIdString){
+        Long phoneId = Long.parseLong(personIdString);
+        return Response
+                .status(200)
+                .header("Content-Type", "application/json")
+                .entity(gson.toJson(PersonDao.getSingleton().findById(phoneId), Phone.class))
+                .build();
+    }
+    
 }
