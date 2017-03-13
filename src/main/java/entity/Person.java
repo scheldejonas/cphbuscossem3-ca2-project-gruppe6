@@ -6,29 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Person
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+public class Person extends Info
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
     private String firstName, lastName;
 
-    @ManyToMany
+    @ManyToMany(mappedBy="people")
     List<Hobby> hobbies;
 
     public Person()
     {
 
-    }
-
-    public int getId()
-    {
-        return id;
-    }
-
-    public void setId(int id)
-    {
-        this.id = id;
     }
 
     public String getFirstName()

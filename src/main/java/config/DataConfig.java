@@ -5,9 +5,7 @@ import javax.persistence.Persistence;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by scheldejonas on 13/03/2017.
- */
+
 public class DataConfig {
 
     private static DataConfig singleton = null;

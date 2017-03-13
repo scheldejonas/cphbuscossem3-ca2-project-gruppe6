@@ -1,6 +1,7 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -11,8 +12,13 @@ public class Phone
     private int id;
     private String number, description;
 
+    @ManyToOne
+    private Info info;
+
+
     public Phone()
     {
+
     }
 
     public Phone(String number, String description) {
@@ -48,5 +54,15 @@ public class Phone
     public void setDescription(String description)
     {
         this.description = description;
+    }
+
+    public Info getInfo()
+    {
+        return info;
+    }
+
+    public void setInfo(Info info)
+    {
+        this.info = info;
     }
 }

@@ -1,9 +1,11 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-public class Info
+@Inheritance
+public abstract class Info
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,10 +13,10 @@ public class Info
     private String email;
 
     @ManyToOne
-    private Address adress;
+    private Address address;
 
-    @OneToMany
-    Phone phone;
+    @OneToMany(mappedBy = "info")
+    private List<Phone> phones;
 
     public Info()
     {
@@ -41,23 +43,24 @@ public class Info
         this.email = email;
     }
 
-    public Address getAdress()
+    public Address getAddress()
     {
-        return adress;
+        return address;
     }
 
-    public void setAdress(Address adress)
+    public void setAddress(Address adress)
     {
-        this.adress = adress;
+        this.address = adress;
     }
 
-    public Phone getPhone()
+    public List<Phone> getPhones()
     {
-        return phone;
+        return phones;
     }
 
-    public void setPhone(Phone phone)
+    public void setPhones(List<Phone> phones)
     {
-        this.phone = phone;
+        this.phones = phones;
     }
+
 }

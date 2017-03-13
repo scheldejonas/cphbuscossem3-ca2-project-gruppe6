@@ -12,7 +12,7 @@ public class CityInfo
     private int id;
     private String zipCode, city;
 
-    @OneToMany
+    @OneToMany(mappedBy = "cityInfo")
     ArrayList<Address> addresses;
 
     public CityInfo()

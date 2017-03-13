@@ -2,6 +2,7 @@ package entity;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Address
@@ -10,6 +11,9 @@ public class Address
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String street, additionalInfo;
+
+    @OneToMany(mappedBy = ("address"))
+    private List<Info> infos;
 
     @ManyToOne
     private CityInfo cityInfo;

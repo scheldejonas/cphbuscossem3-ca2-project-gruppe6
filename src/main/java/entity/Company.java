@@ -1,32 +1,19 @@
 package entity;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class Company
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+public class Company extends Info
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id, numEmployees, marketValue;
+
+    private int numEmployees, marketValue;
     private String name, description, cvr;
 
     public Company()
     {
 
-    }
-
-    public int getId()
-    {
-        return id;
-    }
-
-    public void setId(int id)
-    {
-        this.id = id;
     }
 
     public int getNumEmployees()
