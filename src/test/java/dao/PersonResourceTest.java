@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import rest.PhoneResource;
+import rest.PersonResource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +15,13 @@ import java.util.List;
  * Created by scheldejonas on 13/03/2017.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class PhoneResourceTest {
+public class PersonResourceTest {
 
     @Mock
-    private PhoneDao phoneDao;
+    private PersonDao personDao;
 
     @InjectMocks
-    private PhoneResource phoneResource = new PhoneResource();
+    private PersonResource personResource = new PersonResource();
 
     @Test
     public void requestToApiPhones_ShouldReturnTwo() {

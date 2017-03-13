@@ -1,6 +1,6 @@
 package config;
 
-import rest.PhoneResource;
+import rest.PersonResource;
 
 import javax.ws.rs.core.Application;
 import java.util.Set;
@@ -26,7 +26,7 @@ public class ApiConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(PhoneResource.class);
+        resources.add(PersonResource.class);
     }
 
 }

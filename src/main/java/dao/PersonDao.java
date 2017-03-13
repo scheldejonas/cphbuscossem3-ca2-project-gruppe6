@@ -8,16 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class PhoneDao
+public class PersonDao
 {
-    private static final PhoneDao singleton = new PhoneDao();
+    private static final PersonDao singleton = new PersonDao();
 
-    private PhoneDao()
+    private PersonDao()
     {
 
     }
 
-    public static PhoneDao getSingleton() {
+    public static PersonDao getSingleton() {
         return singleton;
     }
 

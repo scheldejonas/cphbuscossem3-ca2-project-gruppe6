@@ -2,8 +2,9 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import control.Facade;
 import entity.Phone;
-import dao.PhoneDao;
+import dao.PersonDao;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -12,25 +13,26 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 
-@Path("phones")
-public class PhoneResource {
-    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+@Path("persons")
+public class PersonResource {
+    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private Facade facade = Facade.getSingleton();
 
     @Context
     private UriInfo context;
 
-    public PhoneResource() {
+    public PersonResource() {
     }
 
     @GET
-    @Path("/{phoneId}")
+    @Path("/{personId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBingoBango(@PathParam("phoneId") String phoneIdString){
-        Long phoneId = Long.parseLong(phoneIdString);
+    public Response getOnePersonFromId(@PathParam("personId") String personIdString){
+        Long phoneId = Long.parseLong(personIdString);
         return Response
                 .status(200)
                 .header("Content-Type", "application/json")
-                .entity(gson.toJson(PhoneDao.getSingleton().findById(phoneId), Phone.class))
+                .entity(gson.toJson(PersonDao.getSingleton().findById(phoneId), Phone.class))
                 .build();
     }
 
@@ -45,7 +47,7 @@ public class PhoneResource {
                 .header("Access-Control-Allow-Credentials", "true")
                 .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
                 .header("Access-Control-Max-Age", "1209600")
-                .entity(gson.toJson(PhoneDao.getSingleton().findAll(), Phone.class))
+                .entity(gson.toJson(PersonDao.getSingleton().findAll(), Phone.class))
                 .build();
     }
 
