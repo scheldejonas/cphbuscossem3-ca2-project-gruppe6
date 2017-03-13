@@ -21,7 +21,6 @@ public class PhoneResource {
     }
 
     @GET
-    @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRandomAddress(@QueryParam("arguments") String arguments) {
         System.out.println("Testing amount recieved through Header or Path Arguments: " + arguments);
@@ -35,4 +34,5 @@ public class PhoneResource {
                 .entity(PhoneDao.getSingleton().findAll())
                 .build();
     }
+
 }

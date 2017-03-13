@@ -7,10 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class PhoneDao {
+public class PhoneDao
+{
     private static final PhoneDao singleton = new PhoneDao();
 
-    private PhoneDao() {
+    private PhoneDao()
+    {
+
     }
 
     public static PhoneDao getSingleton() {
