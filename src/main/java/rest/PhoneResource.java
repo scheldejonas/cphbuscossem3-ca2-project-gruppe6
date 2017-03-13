@@ -1,7 +1,8 @@
-package phone;
+package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import phone.PhoneDao;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;

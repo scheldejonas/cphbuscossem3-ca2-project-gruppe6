@@ -1,15 +1,14 @@
-package phone;
+package entity;
 
 import javax.persistence.*;
 
-/**
- * Created by scheldejonas on 13/03/2017.
- */
+
 @Entity
-public class Phone {
+public class Phone
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String number, description;
 
     public Phone()
@@ -17,12 +16,12 @@ public class Phone {
 
     }
 
-    public Long getId()
+    public int getId()
     {
         return id;
     }
 
-    public void setId(Long id)
+    public void setId(int id)
     {
         this.id = id;
     }

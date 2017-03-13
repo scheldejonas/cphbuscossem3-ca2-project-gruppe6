@@ -1,6 +1,7 @@
 package phone;
 
 import config.DataConfig;
+import entity.Phone;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
