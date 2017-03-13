@@ -2,6 +2,7 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import entity.Phone;
 import phone.PhoneDao;
 
 import javax.ws.rs.*;
@@ -11,7 +12,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 
-@Path("phones")
+@Path("phone")
 public class PhoneResource {
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -19,6 +20,16 @@ public class PhoneResource {
     private UriInfo context;
 
     public PhoneResource() {
+    }
+
+    @GET
+    @Path("/bingo")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getBingoBango(){
+        Phone pho = new Phone();
+        pho.setId(3);
+        pho.setNumber("343434343");
+        return gson.toJson(pho, Phone.class);
     }
 
     @GET

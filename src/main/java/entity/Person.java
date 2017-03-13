@@ -3,6 +3,7 @@ package entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Person
@@ -13,7 +14,7 @@ public class Person
     private String firstName, lastName;
 
     @ManyToMany
-    ArrayList<Hobby> hobbies;
+    List<Hobby> hobbies;
 
     public Person()
     {
@@ -50,7 +51,7 @@ public class Person
         this.lastName = lastName;
     }
 
-    public ArrayList<Hobby> getHobbies()
+    public List<Hobby> getHobbies()
     {
         return hobbies;
     }
