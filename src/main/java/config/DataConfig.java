@@ -17,7 +17,7 @@ public class DataConfig {
     private int port = 0;
     private String username = "";
     private String password = "";
-    private String profile = "one";
+    private String profile = "two";
 
     public static DataConfig getSingleton() {
         if (singleton == null) {
@@ -36,11 +36,11 @@ public class DataConfig {
             this.entityManagerFactory = createEntityManagerFactory();
         }
         if (profile.equals("two")) {
-            this.host = "localhost";
+            this.host = "viter.dk";
             this.port = 3306;
-            this.databaseName = "???";
-            this.username = "???";
-            this.password = "???";
+            this.databaseName = "yellowpages";
+            this.username = "transformer";
+            this.password = "bookworm#17laesehest";
             this.entityManagerFactory = createEntityManagerFactory();
         }
     }
