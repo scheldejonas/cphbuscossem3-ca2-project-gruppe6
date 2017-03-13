@@ -50,5 +50,5 @@ public class PersonResource {
                 .entity(gson.toJson(PersonDao.getSingleton().findById(phoneId), Phone.class))
                 .build();
     }
-    
+
 }
