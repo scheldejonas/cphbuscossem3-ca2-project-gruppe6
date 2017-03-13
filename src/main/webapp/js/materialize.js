@@ -6031,7 +6031,7 @@ function ariaAttr(attribute, data) {
     return data
 }
 
-// IE8 bug throws an error for activeElements within iframes.
+// IE8 bug throws an errorhandling for activeElements within iframes.
 function getActiveElement() {
     try {
         return document.activeElement
