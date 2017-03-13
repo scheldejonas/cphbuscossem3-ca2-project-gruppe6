@@ -3,6 +3,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import control.Facade;
+import entity.Person;
 import entity.Phone;
 import dao.PersonDao;
 
@@ -47,7 +48,7 @@ public class PersonResource {
                 .header("Access-Control-Allow-Credentials", "true")
                 .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
                 .header("Access-Control-Max-Age", "1209600")
-                .entity(gson.toJson(PersonDao.getSingleton().findAll(), Phone.class))
+                .entity(gson.toJson(PersonDao.getSingleton().findAll(), Person.class))
                 .build();
     }
 

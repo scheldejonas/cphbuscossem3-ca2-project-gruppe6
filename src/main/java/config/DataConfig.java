@@ -6,9 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class DataConfig {
+public class DataConfig
+{
 
-    private static DataConfig singleton = null;
+    private static final DataConfig singleton = new DataConfig();
     private EntityManagerFactory entityManagerFactory = null;
     private String host = "";
     private String databaseName = "";
@@ -18,9 +19,6 @@ public class DataConfig {
     private String profile = "two";
 
     public static DataConfig getSingleton() {
-        if (singleton == null) {
-            singleton = new DataConfig();
-        }
         return singleton;
     }
 
@@ -49,7 +47,6 @@ public class DataConfig {
         myProperties.put("hibernate.connection.url", String.format("jdbc:mysql://%s:%s/%s", host, port, databaseName));
         myProperties.put("hibernate.connection.username", String.format("%s", this.username));
         myProperties.put("hibernate.connection.password", String.format("%s", this.password));
-        myProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQL57InnoDBDialect");
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("hibernate", myProperties);
         return entityManagerFactory;
     }

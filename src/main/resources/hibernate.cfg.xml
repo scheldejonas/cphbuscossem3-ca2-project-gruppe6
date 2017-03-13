@@ -7,5 +7,6 @@
         <property name="hibernate.format_sql">true</property>
         <property name="hibernate.cache.provider_class">org.hibernate.CacheMode</property>
         <property name="hibernate.cache.use_minimal_puts">true</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     </session-factory>
 </hibernate-configuration>

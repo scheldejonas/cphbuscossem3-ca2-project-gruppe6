@@ -1,6 +1,7 @@
 package dao;
 
 import config.DataConfig;
+import entity.Person;
 import entity.Phone;
 
 import javax.persistence.EntityManager;
@@ -21,12 +22,12 @@ public class PersonDao
         return singleton;
     }
 
-    public List<Phone> findAll() {
-        List<Phone> phoneList = new ArrayList<>();
+    public List<Person> findAll() {
+        List<Person> people = new ArrayList<>();
         EntityManager entityManager = DataConfig.getSingleton().getEntityManagerFactory().createEntityManager();
         try {
             entityManager.getTransaction().begin();
-            phoneList = entityManager.createQuery("select p from dao p",Phone.class).getResultList();
+            people = entityManager.createQuery("select p from Phone p").getResultList();
             entityManager.getTransaction().commit();
         } catch (Exception exception) {
             entityManager.getTransaction().rollback();
@@ -35,7 +36,7 @@ public class PersonDao
         } finally {
             entityManager.close();
         }
-        return phoneList;
+        return people;
     }
 
     public Phone findById(Long phoneId) {
