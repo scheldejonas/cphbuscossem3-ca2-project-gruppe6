@@ -59,3 +59,4 @@ public class DataConfig {
     public EntityManagerFactory getEntityManagerFactory() {
         return this.entityManagerFactory;
     }
+}
