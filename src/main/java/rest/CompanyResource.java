@@ -4,18 +4,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import control.Facade;
 import entity.CityInfo;
-import entity.Person;
-import entity.Phone;
-import dao.PersonDao;
 
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path("person")
-public class PersonResource {
+@Path("company")
+public class CompanyResource {
 
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private Facade facade;
@@ -23,7 +23,7 @@ public class PersonResource {
     @Context
     private UriInfo context;
 
-    public PersonResource() {
+    public CompanyResource() {
         facade = new Facade();
     }
 
@@ -50,6 +50,7 @@ public class PersonResource {
     @Path("/{cityZipCode}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCityFromZipCode(@PathParam("cityZipCode") String zipCode){
+
         return Response
                 .status(200)
                 .header("Content-Type", "application/json")

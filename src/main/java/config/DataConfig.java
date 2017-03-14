@@ -6,8 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class DataConfig
-{
+public class DataConfig {
 
     private static final DataConfig singleton = new DataConfig();
     private EntityManagerFactory entityManagerFactory = null;
@@ -54,4 +53,5 @@ public class DataConfig
     public EntityManagerFactory getEntityManagerFactory() {
         return this.entityManagerFactory;
     }
+
 }

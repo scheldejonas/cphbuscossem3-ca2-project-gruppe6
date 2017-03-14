@@ -1,21 +1,15 @@
 package dao;
 
-import config.DataConfig;
 import entity.CityInfo;
-import entity.Person;
-import entity.Phone;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.List;
 
-public class PersonDao {
+public class CompanyDao {
 
     EntityManager manager;
 
-    public PersonDao(EntityManager manager) {
+    public CompanyDao(EntityManager manager) {
         this.manager = manager;
     }
 
