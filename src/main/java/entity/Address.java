@@ -2,6 +2,7 @@ package entity;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,9 +12,6 @@ public class Address
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String street, additionalInfo;
-
-    @OneToMany(mappedBy = "address")
-    private List<Info> infos;
 
     @ManyToOne
     private CityInfo cityInfo;
@@ -62,11 +60,4 @@ public class Address
         this.cityInfo = cityInfo;
     }
 
-    public List<Info> getInfos() {
-        return infos;
-    }
-
-    public void setInfos(List<Info> infos) {
-        this.infos = infos;
-    }
 }

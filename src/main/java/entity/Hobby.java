@@ -14,7 +14,7 @@ public class Hobby
     private String name, description;
 
     @ManyToMany
-    private List<Person> people;
+    List<Person> people = new ArrayList<>();
 
     public Hobby()
     {
@@ -44,11 +44,4 @@ public class Hobby
         this.description = description;
     }
 
-    public List<Person> getPeople() {
-        return people;
-    }
-
-    public void setPeople(List<Person> people) {
-        this.people = people;
-    }
 }

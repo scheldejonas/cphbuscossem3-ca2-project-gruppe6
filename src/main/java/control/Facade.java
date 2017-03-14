@@ -6,12 +6,12 @@ import dao.PersonDao;
 import entity.Address;
 import entity.CityInfo;
 import entity.Person;
-import errorhandling.ServerException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Facade {
 
@@ -31,6 +31,22 @@ public class Facade {
 
     public ArrayList<Person> findPeopleFromZipcode(String zipcode) {
         return personDao.findPeopleFromZipcode(zipcode);
+    }
+
+    public ArrayList<Person> findPeopleFromAddress(String address) {
+        return personDao.findPeopleFromAddress(address);
+    }
+
+    public ArrayList<Person> findPeopleFromPhone(String phone) {
+        return personDao.findPeopleFromPhone(phone);
+    }
+
+    public ArrayList<Person> findPeopleFromHobby(String hobby) {
+        return personDao.findPeopleFromHobby(hobby);
+    }
+
+    public Person getPersonByID(String id) {
+        return personDao.getPersonByID(id);
     }
 
     public ArrayList<String> testArraylist() {
@@ -57,7 +73,7 @@ public class Facade {
     }
 
 
-    public void deleteAddress(int personID) throws ServerException {
+    public void deleteAddress(int personID) {
         Query personQ = manager.createQuery("SELECT p FROM Person p WHERE p.id = :id");
         personQ.setParameter("id", personID);
         Person p = (Person) personQ.getSingleResult();
@@ -68,7 +84,7 @@ public class Facade {
             manager.getTransaction().commit();
         } catch (Exception e) {
             manager.getTransaction().rollback();
-            throw new ServerException("Error deleting person or address");
+            //throw new ServerException("Error deleting person or address");
         }
     }
 

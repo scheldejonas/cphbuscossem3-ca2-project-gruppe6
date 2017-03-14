@@ -6,13 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class Person extends Info
 {
     private String firstName;
     private String lastName;
 
-    @ManyToMany(mappedBy="people")
+    @ManyToMany(mappedBy = "people")
     private List<Hobby> hobbies = new ArrayList<>();
 
     public Person()

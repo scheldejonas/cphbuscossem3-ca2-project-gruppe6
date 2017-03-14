@@ -1,10 +1,11 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Inheritance
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Info
 {
     @Id
@@ -16,7 +17,7 @@ public class Info
     private Address address;
 
     @OneToMany(mappedBy = "info")
-    private List<Phone> phones;
+    private List<Phone> phones = new ArrayList<>();
 
     public Info()
     {

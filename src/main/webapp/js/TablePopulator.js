@@ -2,8 +2,8 @@
  * Created by scheldejonas on 10/03/17.
  */
 var xhrAddressesRequest = new XMLHttpRequest();
-xhrAddressesRequest.onreadystatechange = function () {
-    if (xhrAddressesRequest.readyState === 4 && xhrAddressesRequest.status === 200) {
+xhrAddressesRequest.onreadystatechange = function() {
+    if (xhrAddressesRequest.readyState === 4 /*&& xhrAddressesRequest.status === 200*/) {
         let table = document.querySelector('.table');
         console.log(table);
         let tableBody = document.querySelector('.tableBody');
@@ -22,5 +22,5 @@ xhrAddressesRequest.onreadystatechange = function () {
         tableBody.innerHTML = tableBodyHtml;
     }
 }
-xhrAddressesRequest.open('GET', 'http://localhost:8080/api/person');
+xhrAddressesRequest.open('GET', 'http://localhost:8080/api/person/phone/123124?useSSL=false');
 xhrAddressesRequest.send();

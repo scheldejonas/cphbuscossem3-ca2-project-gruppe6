@@ -24,4 +24,5 @@ public class NotFoundExceptionMapper implements ExceptionMapper<NotFoundExceptio
         Response res = Response.status(statusCode).entity(gson.toJson(err)).type(MediaType.APPLICATION_JSON).build();
         return res;
     }
+
 }

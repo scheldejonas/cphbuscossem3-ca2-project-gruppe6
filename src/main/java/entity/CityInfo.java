@@ -13,9 +13,6 @@ public class CityInfo
     private int id;
     private String zipCode, city;
 
-    @OneToMany(mappedBy = "cityInfo")
-    private List<Address> addresses = new ArrayList<>();
-
     public CityInfo()
     {
     }
@@ -44,11 +41,4 @@ public class CityInfo
         this.city = city;
     }
 
-    public List<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
-    }
 }

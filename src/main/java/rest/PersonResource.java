@@ -4,16 +4,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import control.Facade;
 import entity.CityInfo;
+import entity.Info;
 import entity.Person;
-import entity.Phone;
-import dao.PersonDao;
+import rest.graphbuilder.java.com.google.gson.graph.GraphAdapterBuilder;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Path("person")
 public class PersonResource {
@@ -28,46 +26,13 @@ public class PersonResource {
         facade = new Facade();
     }
 
-    /*
-    //Saved for "Schematic" purposes
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllPhonesAsJson(@QueryParam("arguments") String arguments) {
-        System.out.println("Arguments for getting all phones was: " + arguments);
-        return Response
-                .status(200)
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-                .header("Access-Control-Allow-Credentials", "true")
-                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-                .header("Access-Control-Max-Age", "1209600")
-                .entity(gson.toJson(PersonDao.getSingleton().findAll(), Person.class))
-                .build();
-    }
-    */
-
-    //Testing Facade and DAO
-    @GET
-    @Path("/{cityZipCode}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getCityFromZipCode(@PathParam("cityZipCode") String zipCode){
-        return Response
-                .status(200)
-                .header("Content-Type", "application/json")
-                .entity(gson.toJson(facade.findSingleCity(zipCode), CityInfo.class))
-                .build();
-    }
-
-    //Testing Facade and DAO
-    @GET
-    @Path("/people/{cityZipCode}")
+    @Path("/zip/{cityZipCode}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPeopleFromZipCode(@PathParam("cityZipCode") String zipCode){
         ArrayList<Person> people = facade.findPeopleFromZipcode(zipCode);
-        for (int i = 0; i < people.size(); i++) {
-            System.out.println("Person #" + i + ": " + people.get(i).toString());
-        }
         String s = gson.toJson(people, ArrayList.class);
+        System.out.println(s);
 
         return Response
                 .status(200)
@@ -78,14 +43,59 @@ public class PersonResource {
 
     //Testing Facade and DAO
     @GET
-    @Path("/test/{cityZipCode}")
+    @Path("/hobby/{hobby}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response testArraylist(@PathParam("cityZipCode") String zipCode){
-        facade.addNewPerson();
+    public Response getPeopleFromHobby(@PathParam("hobby") String hobby){
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        new GraphAdapterBuilder().addType(Person.class).registerOn(gsonBuilder);
+        Gson gson = gsonBuilder.setPrettyPrinting().create();
+
+        String s = gson.toJson(facade.findPeopleFromHobby(hobby), ArrayList.class);
+        //System.out.println(s);
+
         return Response
                 .status(200)
                 .header("Content-Type", "application/json")
-                .entity(gson.toJson(facade.testArraylist(), ArrayList.class))
+                .entity(s)
+                .build();
+    }
+
+    //Testing Facade and DAO
+    @GET
+    @Path("/phone/{phoneNo}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPeopleFromPhone(@PathParam("phoneNo") String phoneNo) {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        new GraphAdapterBuilder().addType(Person.class).registerOn(gsonBuilder);
+        Gson gson = gsonBuilder.setPrettyPrinting().create();
+
+        String s = gson.toJson(facade.findPeopleFromPhone(phoneNo), ArrayList.class);
+
+        return Response
+                .status(200)
+                .header("Content-Type", "application/json")
+                .entity(s)
+                .build();
+    }
+
+    //Testing Facade and DAO
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPersonFromID(@PathParam("id") String id) {
+
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        new GraphAdapterBuilder().addType(Person.class).registerOn(gsonBuilder);
+        Gson gson = gsonBuilder.setPrettyPrinting().create();
+
+        Person p = facade.getPersonByID(id);
+        System.out.println("[PersonResource]: " + p.toString());
+        String s = gson.toJson(p, Person.class);
+
+        return Response
+                .status(200)
+                .header("Content-Type", "application/json")
+                .entity(s)
                 .build();
     }
 

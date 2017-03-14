@@ -4,7 +4,6 @@ package entity;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class Company extends Info
 {
     private int numEmployees, marketValue;
