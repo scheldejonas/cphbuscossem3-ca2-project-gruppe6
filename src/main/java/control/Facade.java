@@ -11,6 +11,7 @@ import errorhandling.ServerException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
+import java.util.ArrayList;
 
 public class Facade {
 
@@ -28,22 +29,33 @@ public class Facade {
         return info;
     }
 
-    /*
+    public ArrayList<Person> findPeopleFromZipcode(String zipcode) {
+        return personDao.findPeopleFromZipcode(zipcode);
+    }
+
+    public ArrayList<String> testArraylist() {
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            list.add("This is #" + i);
+        }
+        return list;
+    }
+
     public void addNewPerson() {
         Person p = new Person();
-        Address address = new Address();
-        address.setCityInfo(test("0800"));
-        address.setStreet("Test Street");
+        //Address address = new Address();
+        //address.setCityInfo(test("0800"));
+        //address.setStreet("Test Street");
         p.setEmail("Test@Email.email");
         p.setFirstName("Test1");
         p.setLastName("Test1");
-        p.setAddress(address);
+       // p.setAddress(address);
         manager.getTransaction().begin();
-        manager.persist(address);
+        //manager.persist(address);
         manager.persist(p);
         manager.getTransaction().commit();
     }
-    */
+
 
     public void deleteAddress(int personID) throws ServerException {
         Query personQ = manager.createQuery("SELECT p FROM Person p WHERE p.id = :id");
