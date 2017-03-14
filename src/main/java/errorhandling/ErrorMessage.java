@@ -1,15 +1,24 @@
 package errorhandling;
 
 
+import java.util.Arrays;
+
 public class ErrorMessage
 {
     private int code;
-    private String message;
+    private String message, stackTrace;
 
     public ErrorMessage(String  msg, int code)
     {
         this.code = code;
         this.message = msg;
+    }
+
+    public ErrorMessage(String message, int code, StackTraceElement[] stackTrace)
+    {
+        this.code = code;
+        this.message = message;
+        this.stackTrace = Arrays.toString(stackTrace);
     }
 
     public int getCode()
@@ -30,5 +39,15 @@ public class ErrorMessage
     public void setMessage(String message)
     {
         this.message = message;
+    }
+
+    public String getStackTrace()
+    {
+        return stackTrace;
+    }
+
+    public void setStackTrace(String stackTrace)
+    {
+        this.stackTrace = stackTrace;
     }
 }

@@ -31,6 +31,8 @@ public class ApiConfig extends Application {
         resources.add(PersonResource.class);
         resources.add(CompanyResource.class);
         resources.add(GeneralExceptionMapper.class);
+        resources.add(NotFoundExceptionMapper.class);
+        resources.add(NoResultExceptionMapper.class);
     }
 
 }
