@@ -22,5 +22,5 @@ xhrAddressesRequest.onreadystatechange = function () {
         tableBody.innerHTML = tableBodyHtml;
     }
 }
-xhrAddressesRequest.open('GET', 'http://localhost:8080/api/phones');
+xhrAddressesRequest.open('GET', 'http://localhost:8080/api/person');
 xhrAddressesRequest.send();
