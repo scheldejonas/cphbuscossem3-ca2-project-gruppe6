@@ -15,7 +15,8 @@ import java.util.List;
  * Created by scheldejonas on 13/03/2017.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class PersonResourceTest {
+public class PersonDaoTest
+{
 
     @Mock
     private PersonDao personDao;
