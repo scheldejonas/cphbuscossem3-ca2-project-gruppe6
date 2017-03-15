@@ -11,7 +11,7 @@ public class Person extends Info
     private String firstName;
     private String lastName;
 
-    @ManyToMany(mappedBy = "people")
+    @ManyToMany
     private List<Hobby> hobbies = new ArrayList<>();
 
     public Person()

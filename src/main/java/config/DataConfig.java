@@ -38,7 +38,7 @@ public class DataConfig {
         if (profile.equals("two")) {
             this.host = "viter.dk";
             this.port = 3306;
-            this.databaseName = "yellowpages";
+            this.databaseName = "yellowpages3";
             this.username = "transformer";
             this.password = "bookworm#17laesehest";
             this.entityManagerFactory = createEntityManagerFactory();

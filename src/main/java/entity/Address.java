@@ -11,53 +11,56 @@ public class Address
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String street, additionalInfo;
+    private String street;
+    private String additionalInfo;
 
     @ManyToOne
     private CityInfo cityInfo;
+
+    @OneToMany(mappedBy = "address")
+    private List<Info> infoList = new ArrayList<>();
 
     public Address()
     {
     }
 
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 
-    public void setId(int id)
-    {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getStreet()
-    {
+    public String getStreet() {
         return street;
     }
 
-    public void setStreet(String street)
-    {
+    public void setStreet(String street) {
         this.street = street;
     }
 
-    public String getAdditionalInfo()
-    {
+    public String getAdditionalInfo() {
         return additionalInfo;
     }
 
-    public void setAdditionalInfo(String additionalInfo)
-    {
+    public void setAdditionalInfo(String additionalInfo) {
         this.additionalInfo = additionalInfo;
     }
 
-    public CityInfo getCityInfo()
-    {
+    public CityInfo getCityInfo() {
         return cityInfo;
     }
 
-    public void setCityInfo(CityInfo cityInfo)
-    {
+    public void setCityInfo(CityInfo cityInfo) {
         this.cityInfo = cityInfo;
     }
 
+    public List<Info> getInfoList() {
+        return infoList;
+    }
+
+    public void setInfoList(List<Info> infoList) {
+        this.infoList = infoList;
+    }
 }

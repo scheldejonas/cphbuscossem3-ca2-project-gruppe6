@@ -36,8 +36,7 @@ public class PersonResourceIntegrationTest
     @Test
     public void getPeopleFromZipCode() throws Exception
     {
-        equalTo(true);
-        //given().when().get("/api/person/zip/0800").then().body("0x1.", equalTo());
+        //given().when().get("/api/person/zip/0800").then().body("0x1.address.", equalTo());
     }
 
     @Test

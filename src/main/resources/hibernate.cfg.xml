@@ -5,8 +5,10 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
+        <!--
         <property name="hibernate.cache.provider_class">org.hibernate.Hibernate</property>
         <property name="hibernate.cache.use_minimal_puts">false</property>
+        -->
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     </session-factory>
 </hibernate-configuration>

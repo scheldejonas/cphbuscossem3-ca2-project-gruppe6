@@ -13,7 +13,7 @@ public class Hobby
     private int id;
     private String name, description;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "hobbies")
     List<Person> people = new ArrayList<>();
 
     public Hobby()
