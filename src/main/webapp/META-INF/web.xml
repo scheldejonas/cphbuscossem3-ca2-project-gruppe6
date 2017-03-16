@@ -1,5 +1,0 @@
-<context-param>
-    <description>If true, the stack trace is included with error responses</description>
-    <param-name>debug</param-name>
-    <param-name>false</param-name>
-</context-param>

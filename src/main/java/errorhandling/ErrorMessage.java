@@ -7,6 +7,7 @@ public class ErrorMessage
 {
     private int code;
     private String message, stackTrace;
+    private boolean debug = false;
 
     public ErrorMessage(String  msg, int code)
     {
@@ -18,7 +19,10 @@ public class ErrorMessage
     {
         this.code = code;
         this.message = message;
-        this.stackTrace = Arrays.toString(stackTrace);
+        if(debug)
+        {
+            this.stackTrace = Arrays.toString(stackTrace);
+        }
     }
 
     public int getCode()
