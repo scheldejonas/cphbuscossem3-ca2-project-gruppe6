@@ -34,14 +34,14 @@ public class CompanyDao {
     }
     
     public Company findCompanyFromPhone(String phone) {
-        Query q = manager.createQuery("SELECT c FROM Company c WHERE :phone MEMBER OF c.phones");
+        Query q = manager.createQuery("SELECT c FROM Company c, Phone p WHERE p MEMBER OF c.phones AND p.number = :phone");
         q.setParameter("phone", phone);
         return (Company) q.getSingleResult();
     }
     
-    public ArrayList<Company> findCompaniesFromAddress(String address) {
-        Query q = manager.createQuery("SELECT c FROM Company c WHERE c.address = :address");
-        q.setParameter("address", address);
+    public ArrayList<Company> findCompaniesFromAddress(String street) {
+        Query q = manager.createQuery("SELECT c FROM Company c WHERE c.address.street = :street");
+        q.setParameter("street", street);
         return (ArrayList<Company>) q.getResultList();
     }
     

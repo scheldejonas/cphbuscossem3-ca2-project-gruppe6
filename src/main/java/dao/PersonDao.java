@@ -26,9 +26,9 @@ public class PersonDao {
         return (ArrayList<Person>) q.getResultList();
     }
 
-    public ArrayList<Person> findPeopleFromAddress(String address) {
-        Query q = manager.createQuery("SELECT p FROM Person p WHERE p.address.street = :address");
-        q.setParameter("address", address);
+    public ArrayList<Person> findPeopleFromAddress(String street) {
+        Query q = manager.createQuery("SELECT p FROM Person p WHERE p.address.street = :street");
+        q.setParameter("street", street);
         return (ArrayList<Person>) q.getResultList();
     }
 

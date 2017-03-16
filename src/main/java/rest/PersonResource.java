@@ -6,6 +6,7 @@ import control.Facade;
 import entity.Info;
 import entity.Person;
 
+import javax.persistence.NoResultException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.util.ArrayList;
@@ -31,6 +32,9 @@ public class PersonResource {
         ArrayList<Person> people = facade.findPeopleFromZipcode(zipCode);
         String s = gson.toJson(people, ArrayList.class);
         String formatted = getFormattedJSON(s);
+        if (formatted.isEmpty() || formatted.equals("")) {
+            throw new NoResultException("No person from zip code: " + zipCode + " was found!");
+        }
         return Response
                 .status(200)
                 .header("Content-Type", "application/json")
@@ -46,6 +50,9 @@ public class PersonResource {
         Gson gson = getGraphBuilder();
         String s = gson.toJson(facade.findPeopleFromHobby(hobby), ArrayList.class);
         String formatted = getFormattedJSON(s);
+        if (formatted.isEmpty() || formatted.equals("")) {
+            throw new NoResultException("No person with hobby: " + hobby + " was found!");
+        }
         return Response
                 .status(200)
                 .header("Content-Type", "application/json")
@@ -61,7 +68,9 @@ public class PersonResource {
         Gson gson = getGraphBuilder();
         String s = gson.toJson(facade.findPeopleFromPhone(phoneNo), ArrayList.class);
         String formatted = getFormattedJSON(s);
-        
+        if (formatted.isEmpty() || formatted.equals("")) {
+            throw new NoResultException("No person with number: " + phoneNo + " was found!");
+        }
         return Response
                 .status(200)
                 .header("Content-Type", "application/json")
@@ -76,7 +85,9 @@ public class PersonResource {
         Gson gson = getGraphBuilder();
         String s = gson.toJson(facade.findPeopleFromAddress(address), ArrayList.class);
         String formatted = getFormattedJSON(s);
-
+        if (formatted.isEmpty() || formatted.equals("")) {
+            throw new NoResultException("No person from address: " + address + " was found!");
+        }
         return Response
                 .status(200)
                 .header("Content-Type", "application/json")
@@ -93,7 +104,9 @@ public class PersonResource {
         Gson gson = getGraphBuilder();
         String s = gson.toJson(p, Person.class);
         String formatted = formatSingleJSON(s);
-        
+        if (formatted.isEmpty() || formatted.equals("")) {
+            throw new NoResultException("No person with id: " + id + " was found!");
+        }
         return Response
                 .status(200)
                 .header("Content-Type", "application/json")

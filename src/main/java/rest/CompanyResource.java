@@ -7,6 +7,7 @@ import entity.Company;
 import entity.Info;
 import entity.Person;
 
+import javax.persistence.NoResultException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -33,12 +34,86 @@ public class CompanyResource {
     @GET
     @Path("/zip/{cityZipCode}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPeopleFromZipCode(@PathParam("cityZipCode") String zipCode){
+    public Response getCompanyFromZipCode(@PathParam("cityZipCode") String zipCode){
         Gson gson = getGraphBuilder();
-        ArrayList<Person> people = facade.findPeopleFromZipcode(zipCode);
-        String s = gson.toJson(people, ArrayList.class);
+        ArrayList<Company> companies = facade.findCompaniesFromZip(zipCode);
+        String s = gson.toJson(companies, ArrayList.class);
         String formatted = getFormattedJSON(s);
-        
+        if (formatted.isEmpty() || formatted.equals("")) {
+            throw new NoResultException("No company from zip code: " + zipCode + " was found!");
+        }
+        return Response
+                .status(200)
+                .header("Content-Type", "application/json")
+                .entity(formatted)
+                .build();
+    }
+    
+    @GET
+    @Path("/address/{address}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCompanyFromAddress(@PathParam("address") String address){
+        Gson gson = getGraphBuilder();
+        ArrayList<Company> companies = facade.findCompaniesFromAddress(address);
+        String s = gson.toJson(companies, ArrayList.class);
+        String formatted = getFormattedJSON(s);
+        if (formatted.isEmpty() || formatted.equals("")) {
+            throw new NoResultException("No company from address: " + address + " was found!");
+        }
+        return Response
+                .status(200)
+                .header("Content-Type", "application/json")
+                .entity(formatted)
+                .build();
+    }
+    
+    @GET
+    @Path("/phone/{phoneNo}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCompanyFromPhone(@PathParam("phoneNo") String phoneNo){
+        Gson gson = getGraphBuilder();
+        Company company = facade.findCompanyFromPhone(phoneNo);
+        String s = gson.toJson(company, Company.class);
+        String formatted = formatSingleJSON(s);
+        if (formatted.isEmpty() || formatted.equals("")) {
+            throw new NoResultException("No company with phone: " + phoneNo + " was found!");
+        }
+        return Response
+                .status(200)
+                .header("Content-Type", "application/json")
+                .entity(formatted)
+                .build();
+    }
+    
+    @GET
+    @Path("/cvr/{cvr}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCompanyFromCVR(@PathParam("cvr") String cvr){
+        Gson gson = getGraphBuilder();
+        Company company = facade.findCompanyFromCVR(cvr);
+        String s = gson.toJson(company, Company.class);
+        String formatted = formatSingleJSON(s);
+        if (formatted.isEmpty() || formatted.equals("")) {
+            throw new NoResultException("No company with CVR: " + cvr + " was found!");
+        }
+        return Response
+                .status(200)
+                .header("Content-Type", "application/json")
+                .entity(formatted)
+                .build();
+    }
+    
+    @GET
+    @Path("/name/{name}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCompanyFromName(@PathParam("name") String name){
+        Gson gson = getGraphBuilder();
+        Company company = facade.findCompanyFromName(name);
+        String s = gson.toJson(company, Company.class);
+        String formatted = formatSingleJSON(s);
+        if (formatted.isEmpty() || formatted.equals("")) {
+            throw new NoResultException("No company with name: " + name + " was found!");
+        }
         return Response
                 .status(200)
                 .header("Content-Type", "application/json")
@@ -75,7 +150,7 @@ public class CompanyResource {
             JsonElement ele = o.get("0x1");
             s += gson.toJson(ele) + System.lineSeparator();
         }
-        //System.out.println(ele);
+        System.out.println();
         return s;
     }
     
