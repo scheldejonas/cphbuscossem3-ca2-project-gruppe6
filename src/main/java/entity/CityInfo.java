@@ -17,6 +17,16 @@ public class CityInfo
     {
     }
 
+
+    @Override
+    public int hashCode()
+    {
+        int result = id;
+        result = 31 * result + (zipCode != null ? zipCode.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
+        return result;
+    }
+
     public int getId() {
         return id;
     }
