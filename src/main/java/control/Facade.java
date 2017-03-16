@@ -2,6 +2,7 @@ package control;
 
 
 import config.DataConfig;
+import dao.CityInfoDao;
 import dao.PersonDao;
 import entity.Address;
 import entity.CityInfo;
@@ -17,11 +18,14 @@ public class Facade {
 
     private EntityManager manager;
     private PersonDao personDao;
+    private CityInfoDao cityDao;
 
     public Facade() {
         EntityManagerFactory factory = DataConfig.getSingleton().getEntityManagerFactory();
         manager = factory.createEntityManager();
         personDao = new PersonDao(manager);
+        cityDao = new CityInfoDao(manager);
+
     }
 
     public CityInfo findSingleCity(String zipCode) {
@@ -48,6 +52,8 @@ public class Facade {
     public Person getPersonByID(String id) {
         return personDao.getPersonByID(id);
     }
+
+    public ArrayList<CityInfo> findAllCities(){return cityDao.findAllCities();}
 
     public ArrayList<String> testArraylist() {
         ArrayList<String> list = new ArrayList<>();
