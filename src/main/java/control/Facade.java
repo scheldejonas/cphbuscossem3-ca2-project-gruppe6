@@ -2,9 +2,11 @@ package control;
 
 
 import config.DataConfig;
+import dao.CompanyDao;
 import dao.PersonDao;
 import entity.Address;
 import entity.CityInfo;
+import entity.Company;
 import entity.Person;
 
 import javax.persistence.EntityManager;
@@ -17,11 +19,13 @@ public class Facade {
 
     private EntityManager manager;
     private PersonDao personDao;
+    private CompanyDao companyDao;
 
     public Facade() {
         EntityManagerFactory factory = DataConfig.getSingleton().getEntityManagerFactory();
         manager = factory.createEntityManager();
         personDao = new PersonDao(manager);
+        companyDao = new CompanyDao(manager);
     }
 
     public CityInfo findSingleCity(String zipCode) {
@@ -48,7 +52,27 @@ public class Facade {
     public Person getPersonByID(String id) {
         return personDao.getPersonByID(id);
     }
-
+    
+    public ArrayList<Company> findCompaniesFromZip(String zip) {
+        return companyDao.findCompaniesFromZip(zip);
+    }
+    
+    public ArrayList<Company> findCompaniesFromAddress(String address) {
+        return companyDao.findCompaniesFromAddress(address);
+    }
+    
+    public Company findCompanyFromPhone(String phone) {
+        return companyDao.findCompanyFromPhone(phone);
+    }
+    
+    public Company findCompanyFromCVR(String cvr) {
+        return companyDao.findCompanyFromCVR(cvr);
+    }
+    
+    public Company findCompanyFromName(String name) {
+        return companyDao.findCompanyFromName(name);
+    }
+    
     public ArrayList<String> testArraylist() {
         ArrayList<String> list = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
