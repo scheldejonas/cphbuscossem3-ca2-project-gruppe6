@@ -28,27 +28,26 @@ public class PersonResourceIntegrationTest
     @Test
     public void getPersonInfo()
     {
-        given().when().get("/api/person/1").then().body("0x1.id", equalTo(1), "0x1.firstName", equalTo("Test1"));
+        given().when().get("/api/person/1").then().body("id", equalTo(1), "firstName", equalTo("Test1"));
     }
 
 
-    //WIP
     @Test
     public void getPeopleFromZipCode() throws Exception
     {
-        //given().when().get("/api/person/zip/0800").then().body("0x1.address.", equalTo());
+        given().when().get("/api/person/zip/0555").then().body("address.cityInfo.city", equalTo("Scanning"));
     }
 
     @Test
     public void getPeopleFromHobby() throws Exception
     {
-        given().when().get("/api/person/hobby/fodbold").then().body("0x1.hobbies[0].name[0]", equalTo("Fodbold"));
+        given().when().get("/api/person/hobby/fodbold").then().body("hobbies[0].name", equalTo("Fodbold"));
     }
 
     @Test
     public void getPeopleFromPhone() throws Exception
     {
-        given().when().get("/api/person/phone/123123").then().body("0x1.phones[0].number[0]", equalTo("123123"));
+        given().when().get("/api/person/phone/123123").then().body("phones[0].number", equalTo("123123"));
     }
 
     //Exception Testing
@@ -69,6 +68,5 @@ public class PersonResourceIntegrationTest
                 then().
                 body("code", equalTo(204));
     }
-
 
 }
