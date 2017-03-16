@@ -4,6 +4,7 @@ import com.google.gson.*;
 import com.google.gson.graph.GraphAdapterBuilder;
 import control.Facade;
 import entity.Company;
+import entity.Info;
 import entity.Person;
 
 import javax.ws.rs.GET;
@@ -48,7 +49,10 @@ public class CompanyResource {
     private Gson getGraphBuilder() {
         if (graphBuilder == null) {
             GsonBuilder builder = new GsonBuilder();
-            new GraphAdapterBuilder().addType(Company.class).registerOn(builder);
+            new GraphAdapterBuilder()
+                    .addType(Company.class)
+                    .addType(Info.class)
+                    .registerOn(builder);
             graphBuilder = builder.setPrettyPrinting().create();
         }
         return graphBuilder;
