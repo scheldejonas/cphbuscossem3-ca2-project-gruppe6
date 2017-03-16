@@ -11,20 +11,11 @@ public class CityInfo
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String zipCode, city;
+    private String zipCode;
+    private String city;
 
     public CityInfo()
     {
-    }
-
-
-    @Override
-    public int hashCode()
-    {
-        int result = id;
-        result = 31 * result + (zipCode != null ? zipCode.hashCode() : 0);
-        result = 31 * result + (city != null ? city.hashCode() : 0);
-        return result;
     }
 
     public int getId() {
@@ -50,5 +41,7 @@ public class CityInfo
     public void setCity(String city) {
         this.city = city;
     }
+
+
 
 }

@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class DataConfig {
 
-    private static DataConfig singleton;
+    private static final DataConfig singleton = new DataConfig();
     private EntityManagerFactory entityManagerFactory = null;
     private String host = "";
     private String databaseName = "";
@@ -20,9 +20,6 @@ public class DataConfig {
     private String profile = "two";
 
     public static DataConfig getSingleton() {
-        if (singleton == null) {
-            singleton = new DataConfig();
-        }
         return singleton;
     }
 

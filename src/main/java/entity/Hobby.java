@@ -11,10 +11,11 @@ public class Hobby
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name, description;
+    private String name;
+    private String description;
 
     @ManyToMany(mappedBy = "hobbies")
-    List<Person> people = new ArrayList<>();
+    private List<Person> people = new ArrayList<>();
 
     public Hobby()
     {
@@ -44,4 +45,11 @@ public class Hobby
         this.description = description;
     }
 
+    public List<Person> getPeople() {
+        return people;
+    }
+
+    public void setPeople(List<Person> people) {
+        this.people = people;
+    }
 }

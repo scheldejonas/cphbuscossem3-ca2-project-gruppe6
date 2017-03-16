@@ -1,13 +1,15 @@
 package entity;
 
-
 import javax.persistence.*;
 
 @Entity
 public class Company extends Info
 {
-    private int numEmployees, marketValue;
-    private String name, description, cvr;
+    private int numEmployees;
+    private int marketValue;
+    private String name;
+    private String description;
+    private String cvr;
 
     public Company()
     {

@@ -9,62 +9,84 @@
         <link type="text/css" rel="stylesheet" href="../css/app.css" media="screen,projection" />
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
         <title>YellowPages</title>
 
     </head>
     <body>
-    <center><h2>Yellow Pages</h2></center>
-    <br />
-    <br />
-
-    <div class="container">
-
-        <div class="row">
-            <div class="input-field col s4 ">
-                <select id="selectedOption">
-                    <option value="" disabled selected>Choose A Filter</option>
-                    <option value="phoneNumber">Phone Number</option>
-                    <option value="CVR">CVR</option>
-                    <option value="personName">Person Names</option>
-                    <option value="hobbies">Hobbies</option>
-                    <option value="zipcode">Zip Code</option>
-                </select>
-                <label>Filter By</label>
-            </div>
-            <div id="resultQuery" class="input-field col s6">
-                <input id="searchQuery" type="text" />
-                <label for="searchQuery">Search...</label>
-            </div>
-
-
-
-            <div class="input-field col s2">
-                <button id="searchButton" class="btn waves-effect #757575 grey darken-1" type="submit" onclick="searchFunction()">Submit</button>
+        <div>
+            <div class="row">
+                <div class="col s12">
+                    <h2 class="center">Yellow Pages</h2>
+                </div>
             </div>
         </div>
-        <div id="topContainer" style="border-bottom: 3px solid #757575; border-radius: 2px;" class="col l12">
-            <h5>Results:</h5>
-        </div>
+
         <br />
-        <center>
-        <div id="resultUserContainer" class="row l12">
+        <br />
+
+        <div class="container">
+
+            <div class="row">
+                <div class="input-field col s4 ">
+                    <select id="selectedOption">
+                        <option value="" disabled selected>Choose A Filter</option>
+                        <option value="phoneNumber">Phone Number</option>
+                        <option value="CVR">CVR</option>
+                        <option value="personName">Person Names</option>
+                        <option value="hobbies">Hobbies</option>
+                        <option value="zipcode">Zip Code</option>
+                    </select>
+                    <label>Filter By</label>
+                </div>
+
+                <div id="resultQuery" class="input-field col s6">
+                    <input id="searchQuery" type="text" />
+                    <label for="searchQuery">Search...</label>
+                </div>
+
+                <div class="input-field col s2">
+                    <button id="searchButton" class="btn waves-effect #757575 grey darken-1" type="submit" onclick="searchFunction()">Submit</button>
+                </div>
+            </div>
+            <div id="topContainer" style="border-bottom: 3px solid #757575; border-radius: 2px;" class="col l12">
+                <h5>Results:</h5>
+            </div>
             <br />
+            <div id="resultUserContainer" class="row l12 center">
+                <!-- Here is the result from API coming out -->
+            </div>
 
         </div>
-        </center>
-    </div>
-    <div class="container">
-        <div id="bottomContainer" style="border-bottom: 0px solid #757575; border-radius: 2px;" class="#757575 grey darken-1 white-text">
-            <br />
-            <center>All Rights Reserved - Gruppe 6</center>
-            <br />
-        </div>
-    </div>
-    <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="../js/materialize.min.js"></script>
-    <script type="text/javascript" src="../js/scripts.js"></script>
-    <!--<script type="text/javascript" src="../js/TablePopulator.js"></script>-->
 
-</body>
+        <div class="footer-copyright">
+            <div class="row grey darken-1 white-text">
+                <div id="bottomContainer" class="col m3 pad-top-20 pad-bottom-20">
+                    <p class="center">All Rights Reserved</p>
+                </div>
+                <div class="col m6 pad-top-20 pad-bottom-20">
+                    <p>
+                    <div id="authors">Viktor Kim Christiansen, Jonas Schelde, Christopher Poul Rosendorf, William Pfaffe</div>
+                    </p>
+                </div>
+                <div class="col m1 pad-top-20 pad-bottom-20">
+                    <p>
+                    <div id="class">COS</div>
+                    </p>
+                </div>
+                <div class="col m2 pad-top-20 pad-bottom-20">
+                    <p>
+                    <div id="group">Group number 6</div>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="../js/materialize.min.js"></script>
+        <script type="text/javascript" src="../js/scripts.js"></script>
+        <!--<script type="text/javascript" src="../js/TablePopulator.js"></script>-->
+
+    </body>
 </html>

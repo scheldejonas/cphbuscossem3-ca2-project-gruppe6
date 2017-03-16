@@ -48,7 +48,6 @@ public class Person extends Info
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", hobbies=" + hobbies +
-                '}';
+                "} " + super.toString();
     }
-
 }

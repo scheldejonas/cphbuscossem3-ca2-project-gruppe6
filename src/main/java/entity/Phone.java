@@ -9,7 +9,8 @@ public class Phone
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String number, description;
+    private String number;
+    private String description;
 
     @ManyToOne
     private Info info;

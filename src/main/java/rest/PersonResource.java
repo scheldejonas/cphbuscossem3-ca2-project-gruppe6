@@ -3,29 +3,24 @@ package rest;
 import com.google.gson.*;
 import com.google.gson.graph.GraphAdapterBuilder;
 import control.Facade;
-import entity.CityInfo;
-import entity.Hobby;
 import entity.Info;
 import entity.Person;
 
-import javax.swing.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.util.ArrayList;
-import java.util.List;
 
 @Path("person")
 public class PersonResource {
 
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private Gson graphBuilder;
-    private Facade facade;
+    private Facade facade = Facade.getSingleton();
 
     @Context
     private UriInfo context;
 
     public PersonResource() {
-        facade = new Facade();
     }
 
     @GET
@@ -43,7 +38,7 @@ public class PersonResource {
                 .build();
     }
 
-    //Testing Facade and DAO
+
     @GET
     @Path("/hobby/{hobby}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -58,7 +53,7 @@ public class PersonResource {
                 .build();
     }
     
-    //Testing Facade and DAO
+
     @GET
     @Path("/phone/{phoneNo}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -74,7 +69,6 @@ public class PersonResource {
                 .build();
     }
 
-    //Testing Facade and DAO
     @GET
     @Path("/address/{address}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -90,7 +84,6 @@ public class PersonResource {
                 .build();
     }
 
-    //Testing Facade and DAO
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -111,7 +104,10 @@ public class PersonResource {
     private Gson getGraphBuilder() {
         if (graphBuilder == null) {
             GsonBuilder builder = new GsonBuilder();
-            new GraphAdapterBuilder().addType(Person.class).registerOn(builder);
+            new GraphAdapterBuilder()
+                    .addType(Person.class)
+                    .addType(Info.class)
+                    .registerOn(builder);
             graphBuilder = builder.setPrettyPrinting().create();
         }
         return graphBuilder;
@@ -134,7 +130,7 @@ public class PersonResource {
             JsonElement ele = o.get("0x1");
             s += gson.toJson(ele) + System.lineSeparator();
         }
-        //System.out.println(ele);
+        System.out.println();
         return s;
     }
     

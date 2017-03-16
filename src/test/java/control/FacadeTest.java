@@ -25,7 +25,7 @@ public class FacadeTest
     private PersonDao personDao;
 
     @InjectMocks
-    private Facade facade = new Facade();
+    private Facade facade = Facade.getSingleton();
 
     @Test
     public void findSingleCity_shouldReturnCityInfo() throws Exception

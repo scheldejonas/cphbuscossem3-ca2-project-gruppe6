@@ -23,44 +23,35 @@ public class Info
     {
     }
 
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 
-    public void setId(int id)
-    {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getEmail()
-    {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email)
-    {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public Address getAddress()
-    {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(Address adress)
-    {
-        this.address = adress;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
-    public List<Phone> getPhones()
-    {
+    public List<Phone> getPhones() {
         return phones;
     }
 
-    public void setPhones(List<Phone> phones)
-    {
+    public void setPhones(List<Phone> phones) {
         this.phones = phones;
     }
-
 }

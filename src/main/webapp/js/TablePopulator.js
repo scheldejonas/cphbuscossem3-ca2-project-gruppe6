@@ -3,7 +3,7 @@
  */
 var xhrAddressesRequest = new XMLHttpRequest();
 xhrAddressesRequest.onreadystatechange = function() {
-    if (xhrAddressesRequest.readyState === 4 /*&& xhrAddressesRequest.status === 200*/) {
+    if (xhrAddressesRequest.readyState === 4 && xhrAddressesRequest.status === 200) {
         var table = document.querySelector('.table');
         console.log(table);
         var tableBody = document.querySelector('.tableBody');
@@ -27,7 +27,7 @@ xhrAddressesRequest.send();
 
 var xhrAddressesRequest = new XMLHttpRequest();
 xhrAddressesRequest.onreadystatechange = function() {
-    if (xhrAddressesRequest.readyState === 4 /*&& xhrAddressesRequest.status === 200*/) {
+    if (xhrAddressesRequest.readyState === 4 && xhrAddressesRequest.status === 200) {
         var resultContainer = document.getElementById("resultContainer");
         var dataObjectModel = JSON.parse(xhrAddressesRequest.responseText);
         console.log(dataObjectModel);

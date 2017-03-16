@@ -18,17 +18,22 @@ import java.util.List;
 
 public class Facade {
 
+    private static final Facade singleton = new Facade();
     private EntityManager manager;
     private PersonDao personDao;
     private CompanyDao companyDao;
     private CityInfoDao cityDao;
 
-    public Facade() {
+    private Facade() {
         EntityManagerFactory factory = DataConfig.getSingleton().getEntityManagerFactory();
         manager = factory.createEntityManager();
         personDao = new PersonDao(manager);
         companyDao = new CompanyDao(manager);
         cityDao = new CityInfoDao(manager);
+    }
+
+    public static Facade getSingleton() {
+        return singleton;
     }
 
     public CityInfo findSingleCity(String zipCode) {
@@ -76,7 +81,9 @@ public class Facade {
         return companyDao.findCompanyFromName(name);
     }
     
-    public ArrayList<CityInfo> findAllCities(){return cityDao.findAllCities();}
+    public ArrayList<CityInfo> findAllCities() {
+        return cityDao.findAllCities();
+    }
 
     public ArrayList<String> testArraylist() {
         ArrayList<String> list = new ArrayList<>();

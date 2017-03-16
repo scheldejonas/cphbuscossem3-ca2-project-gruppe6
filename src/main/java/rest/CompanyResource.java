@@ -3,7 +3,7 @@ package rest;
 import com.google.gson.*;
 import com.google.gson.graph.GraphAdapterBuilder;
 import control.Facade;
-import entity.CityInfo;
+import entity.Company;
 import entity.Person;
 
 import javax.ws.rs.GET;
@@ -21,28 +21,13 @@ public class CompanyResource {
 
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private Gson graphBuilder;
-    private Facade facade;
+    private Facade facade = Facade.getSingleton();
 
     @Context
     private UriInfo context;
 
     public CompanyResource() {
-        facade = new Facade();
     }
-
-    /*
-    //Testing Facade and DAO
-    @GET
-    @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getCityFromZipCode(@PathParam("id") String id){
-        return Response
-                .status(200)
-                .header("Content-Type", "application/json")
-                .entity(gson.toJson(facade.findSingleCity(zipCode), CityInfo.class))
-                .build();
-    }
-    */
     
     @GET
     @Path("/zip/{cityZipCode}")
@@ -63,7 +48,7 @@ public class CompanyResource {
     private Gson getGraphBuilder() {
         if (graphBuilder == null) {
             GsonBuilder builder = new GsonBuilder();
-            new GraphAdapterBuilder().addType(Person.class).registerOn(builder);
+            new GraphAdapterBuilder().addType(Company.class).registerOn(builder);
             graphBuilder = builder.setPrettyPrinting().create();
         }
         return graphBuilder;
