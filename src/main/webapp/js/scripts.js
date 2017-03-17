@@ -105,7 +105,7 @@ function searchFunction() {
 
     userDivContainer.innerHTML += "<br /><br /><br /><center><div class='preloader-wrapper big active'>" +
         "<div class='spinner-layer spinner-blue-only'>" +
-        "<div class='circle-clipper left'>"
+        "<div class='circle-clipper left'>" +
         "<div class='circle'></div>" +
         "</div><div class='gap-patch'>" +
         "<div class='circle'></div>" +
@@ -136,8 +136,6 @@ function searchFunction() {
             httpGetCompany("http://localhost:8080/api/company/zip/" + searchQuery.value + "?useSSL=false");
             //httpGetCity("http://localhost:8080/api/person/zip/" + searchQuery.value + "?useSSL=false");
             break;
-
-
     }
 }
 
