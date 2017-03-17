@@ -89,9 +89,16 @@ var userArr =[{
 var sel = document.getElementById("selectedOption");
 var searchQuery = document.getElementById('searchQuery');
 
+let populateResultContainerWithErrorMessage = function (messageString) {
+    userDivContainer.innerHTML = '' +
+        '<div class="col s12 center">' +
+        '<i class="large material-icons">error_outline</i>' +
+        '<p>Please type into the search field before submitting</p></div>'
+}
 function searchFunction() {
     if(searchQuery.value === "" && sel.options[sel.selectedIndex].value === "" || sel.options[sel.selectedIndex].value === "" || searchQuery.value === ""){
         alert("Please fill in all the parameters before searching!");
+        populateResultContainerWithErrorMessage("Please type into the search field before submitting");
         return;
     }
 
@@ -150,15 +157,15 @@ function getHobbies() {
     }
 }
 
-function populatedPersonCard(userElement){
+function populatedPersonCard(personElement){
     console.log("Populating cards...");
     var str = "<div class='resultCard col s12 m6'>" +
         "<div class='card blue-grey darken-1'>" +
         "<div class='card-content white-text'>" +
-        "<span class='card-title'>" + userElement.firstName + " " + userElement.lastName + "</span>" +
-        "<p>Address: " + userElement.address.street + "</p>" +
-        "<p>Hobbies: " + getAllHobbiesToText(userElement.hobbies) + "</p>" +
-        "<p>Phone Numbers: " + getAllPhonesToText(userElement.phones) + "</p>" +
+        "<span class='card-title'>" + personElement.firstName + " " + personElement.lastName + "</span>" +
+        "<p>Address: " + personElement.address.street + "</p>" +
+        "<p>Hobbies: " + getAllHobbiesToText(personElement.hobbies) + "</p>" +
+        "<p>Phone Numbers: " + getAllPhonesToText(personElement.phones) + "</p>" +
          "</div></div></div>";
         return str;
 }
