@@ -23,3 +23,11 @@
     border-bottom: 3px solid #757575;
     border-radius: 2px;
 }
+
+#footer {
+    position:fixed;
+    width:100%;
+    bottom: -2.1%;
+    left:0;
+
+}

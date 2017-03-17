@@ -94,6 +94,23 @@ public class PersonResource {
                 .entity(formatted)
                 .build();
     }
+    
+    @GET
+    @Path("/name/{name}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPeopleFromName(@PathParam("name") String name) {
+        Gson gson = getGraphBuilder();
+        String s = gson.toJson(facade.findPeopleFromName(name), ArrayList.class);
+        String formatted = getFormattedJSON(s);
+        if (formatted.isEmpty() || formatted.equals("")) {
+            throw new NoResultException("No person with name: " + name + " was found!");
+        }
+        return Response
+                .status(200)
+                .header("Content-Type", "application/json")
+                .entity(formatted)
+                .build();
+    }
 
     @GET
     @Path("/{id}")
@@ -129,7 +146,9 @@ public class PersonResource {
     private String formatSingleJSON(String singleJSON) {
         JsonObject o = gson.fromJson(singleJSON, JsonObject.class);
         JsonElement ele = o.get("0x1");
-        return gson.toJson(ele);
+        JsonArray arr = new JsonArray();
+        arr.add(ele);
+        return gson.toJson(arr);
     }
     
     private String getFormattedJSON(String fullJSON) {
@@ -138,13 +157,12 @@ public class PersonResource {
         for (int i = 0; i < jsonArray.size(); i++) {
             objects.add(jsonArray.get(i).getAsJsonObject());
         }
-        String s = "";
+        JsonArray jsonArrayNew = new JsonArray();
         for (JsonObject o : objects) {
             JsonElement ele = o.get("0x1");
-            s += gson.toJson(ele) + System.lineSeparator();
+            jsonArrayNew.add(ele);
         }
-        System.out.println();
-        return s;
+        return gson.toJson(jsonArrayNew);
     }
     
 }

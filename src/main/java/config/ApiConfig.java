@@ -2,7 +2,7 @@ package config;
 
 import rest.PersonResource;
 import rest.CompanyResource;
-import errorhandling.*;
+//import errorhandling.*;
 
 import javax.persistence.NoResultException;
 import javax.ws.rs.core.Application;
@@ -31,9 +31,9 @@ public class ApiConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(PersonResource.class);
         resources.add(CompanyResource.class);
-        resources.add(GeneralExceptionMapper.class);
-        resources.add(NoResultExceptionMapper.class);
-        resources.add(NotFoundExceptionMapper.class);
+//        resources.add(GeneralExceptionMapper.class);
+//        resources.add(NoResultExceptionMapper.class);
+//        resources.add(NotFoundExceptionMapper.class);
     }
 
 }

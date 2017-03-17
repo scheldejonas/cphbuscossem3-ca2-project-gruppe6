@@ -6,6 +6,11 @@ $(document).ready(function() {
     $('select').material_select();
 });
 
+document.getElementById("searchQuery").addEventListener("keydown", function(event) {
+    if (event.keyCode == 13) {
+        searchFunction();
+    }
+});
 
 var userArr =[{
     "firstName": "Test1",
@@ -91,6 +96,12 @@ function searchFunction() {
     }
 
     var userDivContainer = document.getElementById("resultUserContainer");
+    userDivContainer.innerHTML = "<br /><div class='progress'>" +
+        "<div class='indeterminate'></div>" +
+        "</div>";
+
+
+    var userDivContainer = document.getElementById("resultUserContainer");
 
     userDivContainer.innerHTML += "<br /><br /><br /><center><div class='preloader-wrapper big active'>" +
         "<div class='spinner-layer spinner-blue-only'>" +
@@ -104,21 +115,26 @@ function searchFunction() {
         "</div>" +
         "</div></center>";
 
+    console.log("Selected value: " + sel.options[sel.selectedIndex].value);
+
     switch(sel.options[sel.selectedIndex].value){
         case "phoneNumber":
-            httpGetPhone("http://localhost:8081/api/person/phone/" + searchQuery.value + "?useSSL=false");
+            httpGetPerson("http://localhost:8080/api/person/phone/" + searchQuery.value);
             break;
         case "personName":
-            alert("Not implemented yet!")
+            httpGetPerson("http://localhost:8080/api/person/name/" + searchQuery.value);
             break;
         case "CVR":
-            alert("Not implemented yet!");
+            httpGetCompany("http://localhost:8080/api/company/cvr/" + searchQuery.value);
             break;
         case "hobbies":
-            httpGetHobbies("http://localhost:8081/api/person/hobby/" + searchQuery.value + "?useSSL=false");
+            httpGetPerson("http://localhost:8080/api/person/hobby/" + searchQuery.value + "?useSSL=false");
+            //httpGetHobbies("http://localhost:8080/api/person/hobby/" + searchQuery.value + "?useSSL=false");
             break;
         case "zipcode":
-            httpGetCity("http://localhost:8081/api/person/zip/" + searchQuery.value + "?useSSL=false");
+            //httpGetPerson("http://localhost:8080/api/person/zip/" + searchQuery.value + "?useSSL=false");
+            httpGetCompany("http://localhost:8080/api/company/zip/" + searchQuery.value + "?useSSL=false");
+            //httpGetCity("http://localhost:8080/api/person/zip/" + searchQuery.value + "?useSSL=false");
             break;
 
 
@@ -136,12 +152,12 @@ function getHobbies() {
     }
 }
 
-function populatedCard(userElement){
+function populatedPersonCard(userElement){
     console.log("Populating cards...");
     var str = "<div class='resultCard col s12 m6'>" +
         "<div class='card blue-grey darken-1'>" +
         "<div class='card-content white-text'>" +
-        "<span class='card-title'>" + userElement.firstName + " " + userElement.lastName + "</span>"+
+        "<span class='card-title'>" + userElement.firstName + " " + userElement.lastName + "</span>" +
         "<p>Address: " + userElement.address.street + "</p>" +
         "<p>Hobbies: " + getAllHobbiesToText(userElement.hobbies) + "</p>" +
         "<p>Phone Numbers: " + getAllPhonesToText(userElement.phones) + "</p>" +
@@ -149,14 +165,46 @@ function populatedCard(userElement){
         return str;
 }
 
+function populatedCompanyCard(companyElement){
+    console.log("Populating cards...");
+    var str = "<div class='resultCard col s12 m6'>" +
+        "<div class='card blue-grey darken-1'>" +
+        "<div class='card-content white-text'>" +
+        "<span class='card-title'>" + companyElement.name + "</span>" +
+        "<p>CVR Number: " + companyElement.cvr + "</p>" +
+        "<p>Description: " + companyElement.description + "</p>" +
+        "<p>Email: " + companyElement.email + "</p>" +
+        "<p>Address: " + companyElement.address.street + "</p>" +
+        "<p>Phone Numbers: " + getAllPhonesToText(companyElement.phones) + "</p>" +
+        "</div></div></div>";
+    return str;
+}
+
 function addToUserDivContainer(userArrS){
     var str = "";
-    console.log("Processing multiple objects");
-    for(var i = 0; i<userArrS.length; i++){
-        console.log("Working with individual objects: " + userArrS[i].firstName + " " + userArrS[i].lastName);
-        str += populatedCard(userArrS[i]) + "<br />";
+    if (userArrS.length == undefined) {
+        str += populatedPersonCard(userArrS);
+        console.log("Adding single person: " + str);
+        return str;
     }
+    for(var i = 0; i<userArrS.length; i++){
+        console.log("Working with object " + (i + 1) + "/" + userArrS.length);
+        str += populatedPersonCard(userArrS[i]);
+    }
+    return str;
+}
 
+function addToCompanyDivContainer(userArrS){
+    var str = "";
+    if (userArrS.length == undefined) {
+        str += populatedCompanyCard(userArrS);
+        console.log("Adding single company: " + str);
+        return str;
+    }
+    for(var i = 0; i<userArrS.length; i++){
+        console.log("Working with object " + (i + 1) + "/" + userArrS.length);
+        str += populatedCompanyCard(userArrS[i]);
+    }
     return str;
 }
 
@@ -164,6 +212,12 @@ function populatePersonContainer(){
     var userDivContainer = document.getElementById("resultUserContainer");
     userDivContainer.innerHTML = "";
     userDivContainer.innerHTML += addToUserDivContainer(userArr);
+}
+
+function populateCompanyContainer(){
+    var userDivContainer = document.getElementById("resultUserContainer");
+    userDivContainer.innerHTML = "";
+    userDivContainer.innerHTML += addToCompanyDivContainer(userArr);
 }
 
 function getAllHobbiesToText(hobbyArr){
@@ -220,7 +274,7 @@ function httpGetCity(theUrl){
         theUrl,
         function(data) {
             console.log("Hej vi læser data");
-            userArr = [data];
+            userArr = data;
             populatePersonContainer();
         }
     );
@@ -230,10 +284,48 @@ function httpGetPhone(theUrl){
     userArr = [];
     $.get(
         theUrl,
-        {paramOne : 1, paramX : 'abc'},
         function(data) {
-            userArr = [data];
+            userArr = data;
             populatePersonContainer();
         }
     );
+}
+
+function httpGetPerson(theUrl){
+    userArr = [];
+    $.get(
+        theUrl,
+        function(data) {
+            userArr = data;
+            populatePersonContainer();
+        }
+    );
+}
+
+function httpGetCompany(theUrl){
+    userArr = [];
+    $.get(
+        theUrl,
+        function(data) {
+            userArr = data;
+            populateCompanyContainer();
+        }
+    );
+}
+
+function httpGetCompanyAsync(theUrl){
+    userArr = [];
+    console.log("Running getCompany From CVR");
+    $.ajax({
+        url: theUrl,
+        success: function (data) {
+            //console.log("Success parsing company from CVR! " + data.toString());
+            userArr = data;
+            populateCompanyContainer();
+        },
+        error: function (jqXHR, exception) {
+            console.log('Uncaught Error.\n' + jqXHR.responseText);
+        },
+        async: false,
+    });
 }

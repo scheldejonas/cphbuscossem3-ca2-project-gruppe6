@@ -7,6 +7,7 @@ import entity.Company;
 import entity.Info;
 import entity.Person;
 
+import javax.json.Json;
 import javax.persistence.NoResultException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -136,7 +137,9 @@ public class CompanyResource {
     private String formatSingleJSON(String singleJSON) {
         JsonObject o = gson.fromJson(singleJSON, JsonObject.class);
         JsonElement ele = o.get("0x1");
-        return gson.toJson(ele);
+        JsonArray arr = new JsonArray();
+        arr.add(ele);
+        return gson.toJson(arr);
     }
     
     private String getFormattedJSON(String fullJSON) {
@@ -145,13 +148,12 @@ public class CompanyResource {
         for (int i = 0; i < jsonArray.size(); i++) {
             objects.add(jsonArray.get(i).getAsJsonObject());
         }
-        String s = "";
+        JsonArray jsonArrayNew = new JsonArray();
         for (JsonObject o : objects) {
             JsonElement ele = o.get("0x1");
-            s += gson.toJson(ele) + System.lineSeparator();
+            jsonArrayNew.add(ele);
         }
-        System.out.println();
-        return s;
+        return gson.toJson(jsonArrayNew);
     }
     
 }

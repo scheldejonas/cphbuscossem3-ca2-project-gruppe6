@@ -43,6 +43,12 @@ public class PersonDao {
         q.setParameter("hobby", hobby);
         return (ArrayList<Person>) q.getResultList();
     }
+    
+    public ArrayList<Person> findPeopleFromName(String name) {
+        Query q = manager.createQuery("SELECT p FROM Person p WHERE p.firstName = :name OR p.lastName = :name");
+        q.setParameter("name", name);
+        return (ArrayList<Person>) q.getResultList();
+    }
 
     public Person getPersonByID(String id) {
         Query q = manager.createQuery("SELECT p FROM Person p WHERE p.id = :id");

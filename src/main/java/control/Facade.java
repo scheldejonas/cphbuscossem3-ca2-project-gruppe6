@@ -56,6 +56,10 @@ public class Facade {
     public ArrayList<Person> findPeopleFromHobby(String hobby) {
         return personDao.findPeopleFromHobby(hobby);
     }
+    
+    public ArrayList<Person> findPeopleFromName(String name) {
+        return personDao.findPeopleFromName(name);
+    }
 
     public Person getPersonByID(String id) {
         return personDao.getPersonByID(id);
