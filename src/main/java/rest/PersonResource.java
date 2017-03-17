@@ -173,7 +173,7 @@ public class PersonResource {
         return Response
                 .status(200)
                 .header("Content-Type", "application/json")
-                .entity()
+                .entity(new Person())
                 .build();
     }
 
