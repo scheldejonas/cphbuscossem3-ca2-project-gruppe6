@@ -1,11 +1,11 @@
 /*body {*/
-    /*display: flex;*/
-    /*min-height: 100vh;*/
-    /*flex-direction: column;*/
+/*display: flex;*/
+/*min-height: 100vh;*/
+/*flex-direction: column;*/
 /*}*/
 
 /*main {*/
-    /*flex: 1 0 auto;*/
+/*flex: 1 0 auto;*/
 /*}*/
 
 #google-doc-frame iframe {
@@ -26,8 +26,14 @@
 
 #footer {
     position:fixed;
-    width:100%;
-    bottom: -2.1%;
-    left:0;
+    bottom: 0;
+    width: 100%;
+}
 
+.no-margin-bottom {
+    margin-bottom: 0px;
+}
+
+div#resultUserContainer {
+    margin-bottom: 70px;
 }
