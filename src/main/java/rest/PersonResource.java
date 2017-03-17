@@ -167,9 +167,9 @@ public class PersonResource {
     }
 
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response recievePersonToPersist_AndReturnStatus(@QueryParam("email") String email, @QueryParam("firstName") String firstName, @QueryParam("lastName") String lastName) throws ServerException{
+    public Response recievePersonToPersist_AndReturnStatus(@FormParam("email") String email, @FormParam("firstName") String firstName, @FormParam("lastName") String lastName) throws ServerException{
         Person person = new Person();
         person.setFirstName(firstName);
         person.setLastName(lastName);
@@ -181,6 +181,5 @@ public class PersonResource {
                 .entity(gson.toJson((Person)person, Person.class))
                 .build();
     }
-
     
 }

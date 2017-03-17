@@ -31,7 +31,7 @@ public class FacadeTest
     public void findSingleCity_shouldReturnCityInfo() throws Exception
     {
         when(personDao.findSingleCity("1")).thenReturn(new CityInfo());
-        assertThat(facade.findSingleCity("1"), instanceOf(CityInfo.class));
+        assertThat( facade.findSingleCity("1") , instanceOf(CityInfo.class) );
         verify(personDao).findSingleCity("1");
     }
 
