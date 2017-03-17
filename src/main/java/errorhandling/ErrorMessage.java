@@ -7,7 +7,7 @@ public class ErrorMessage
 {
     private int code;
     private String message, stackTrace;
-    private boolean debug = true;
+    private boolean debug = false;
 
     public ErrorMessage(String  msg, int code)
     {
