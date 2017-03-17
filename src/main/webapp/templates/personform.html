@@ -25,27 +25,28 @@
         </div>
     </div>
 
-        <form method="POST" action="api/person" accept-charset="=UTF-8">
+        <form method="POST" action="../api/person" accept-charset="UTF-8">
+            <input type="hidden" name="SSL" value="false"/>
             <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">account_circle</i>
-                    <input id="per_firstname" type="text" class="validate">
+                    <input id="per_firstname" name="firstName" type="text" class="validate">
                     <label for="per_firstname">First Name</label>
                 </div>
                 <div class="input-field col s6">
                     <i class="material-icons prefix">verified_user</i>
-                    <input id="per_lastname" type="tel" class="validate">
+                    <input id="per_lastname" name="lastName" type="tel" class="validate">
                     <label for="per_lastname">Last Name</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">email</i>
-                    <input id="per_email" type="text" class="validate">
+                    <input id="per_email" name="email" type="email" class="validate">
                     <label for="per_email">Email</label>
                 </div>
             </div>
-            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+            <button class="btn waves-effect waves-light" type="submit">Submit
                 <i class="material-icons right">send</i>
             </button>
 

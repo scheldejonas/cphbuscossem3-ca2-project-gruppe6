@@ -9,6 +9,7 @@ import entity.Address;
 import entity.CityInfo;
 import entity.Company;
 import entity.Person;
+import errorhandling.ServerException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -128,7 +129,7 @@ public class Facade {
         }
     }
 
-    public void createPerson(Person person) {
-        return personDao.createPerson(person);
+    public void createPerson(Person person) throws ServerException{
+        personDao.createPerson(person);
     }
 }

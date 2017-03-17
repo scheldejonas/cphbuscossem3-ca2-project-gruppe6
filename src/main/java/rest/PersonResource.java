@@ -5,6 +5,7 @@ import com.google.gson.graph.GraphAdapterBuilder;
 import control.Facade;
 import entity.Info;
 import entity.Person;
+import errorhandling.ServerException;
 
 import javax.persistence.NoResultException;
 import javax.ws.rs.*;
@@ -168,7 +169,7 @@ public class PersonResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response recievePersonToPersist_AndReturnStatus(@QueryParam("email") String email, @QueryParam("firstName") String firstName, @QueryParam("lastName") String lastName) {
+    public Response recievePersonToPersist_AndReturnStatus(@QueryParam("email") String email, @QueryParam("firstName") String firstName, @QueryParam("lastName") String lastName) throws ServerException{
         Person person = new Person();
         person.setFirstName(firstName);
         person.setLastName(lastName);
@@ -177,7 +178,7 @@ public class PersonResource {
         return Response
                 .status(200)
                 .header("Content-Type", "application/json")
-                .entity(person)
+                .entity(gson.toJson((Person)person, Person.class))
                 .build();
     }
 
