@@ -88,39 +88,40 @@ var userArr =[{
 
 var sel = document.getElementById("selectedOption");
 var searchQuery = document.getElementById('searchQuery');
+var userDivContainer = document.getElementById("resultUserContainer");
 
-let populateResultContainerWithErrorMessage = function (messageString) {
-    userDivContainer.innerHTML = '' +
-        '<div class="col s12 center">' +
-        '<i class="large material-icons">error_outline</i>' +
-        '<p>Please type into the search field before submitting</p></div>'
+
+function populateResultContainerWithErrorMessage(errorMessageString) {
+        userDivContainer.innerHTML = '' +
+            '<div class="col s12 center">' +
+                '<i class="large material-icons">error_outline</i>' +
+                '<p>' + errorMessageString + '</p>' +
+            '</div>';
 }
+
 function searchFunction() {
     if(searchQuery.value === "" && sel.options[sel.selectedIndex].value === "" || sel.options[sel.selectedIndex].value === "" || searchQuery.value === ""){
-        alert("Please fill in all the parameters before searching!");
-        populateResultContainerWithErrorMessage("Please type into the search field before submitting");
+        populateResultContainerWithErrorMessage('Please type into the search field before submitting');
         return;
     }
 
-    var userDivContainer = document.getElementById("resultUserContainer");
-    userDivContainer.innerHTML = "<br /><div class='progress'>" +
-        "<div class='indeterminate'></div>" +
-        "</div>";
+    userDivContainer.innerHTML = '' +
+        '<br />' +
+        '<div class="progress">' +
+            '<div class="indeterminate"></div>' +
+        '</div>';
 
-
-    var userDivContainer = document.getElementById("resultUserContainer");
-
-    userDivContainer.innerHTML += "<br /><br /><br /><center><div class='preloader-wrapper big active'>" +
-        "<div class='spinner-layer spinner-blue-only'>" +
-        "<div class='circle-clipper left'>" +
-        "<div class='circle'></div>" +
-        "</div><div class='gap-patch'>" +
-        "<div class='circle'></div>" +
-        "</div><div class='circle-clipper right'>" +
-        "<div class='circle'></div>" +
-        "</div>" +
-        "</div>" +
-        "</div></center>";
+    // userDivContainer.innerHTML += "<br /><br /><br /><center><div class='preloader-wrapper big active'>" +
+    //     "<div class='spinner-layer spinner-blue-only'>" +
+    //     "<div class='circle-clipper left'>" +
+    //     "<div class='circle'></div>" +
+    //     "</div><div class='gap-patch'>" +
+    //     "<div class='circle'></div>" +
+    //     "</div><div class='circle-clipper right'>" +
+    //     "<div class='circle'></div>" +
+    //     "</div>" +
+    //     "</div>" +
+    //     "</div></center>";
 
     console.log("Selected value: " + sel.options[sel.selectedIndex].value);
 
@@ -214,14 +215,21 @@ function addToCompanyDivContainer(userArrS){
 }
 
 function populatePersonContainer(){
-    var userDivContainer = document.getElementById("resultUserContainer");
-    userDivContainer.innerHTML = "";
+    userDivContainer.innerHTML = '';
+    // console.log('Length of retrieved user array' + userArr.length);
+    if (userArr.length === 0) {
+        populateResultContainerWithErrorMessage('There was unfortunatly no content to retrieve on your search');
+        return;
+    }
     userDivContainer.innerHTML += addToUserDivContainer(userArr);
 }
 
 function populateCompanyContainer(){
-    var userDivContainer = document.getElementById("resultUserContainer");
-    userDivContainer.innerHTML = "";
+    userDivContainer.innerHTML = '';
+    if (userArr.length === 0) {
+        populateResultContainerWithErrorMessage('There was unfortunatly no content to retrieve on your search');
+        return;
+    }
     userDivContainer.innerHTML += addToCompanyDivContainer(userArr);
 }
 
