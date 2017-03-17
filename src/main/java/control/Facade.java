@@ -128,4 +128,7 @@ public class Facade {
         }
     }
 
+    public void createPerson(Person person) {
+        return personDao.createPerson(person);
+    }
 }

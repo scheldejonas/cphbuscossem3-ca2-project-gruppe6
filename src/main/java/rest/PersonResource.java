@@ -168,12 +168,16 @@ public class PersonResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response recievePersonToPersist_AndReturnStatus(@QueryParam("email") String name, @QueryParam("firstName") String firstName, @QueryParam("lastName") String lastName) {
-        
+    public Response recievePersonToPersist_AndReturnStatus(@QueryParam("email") String email, @QueryParam("firstName") String firstName, @QueryParam("lastName") String lastName) {
+        Person person = new Person();
+        person.setFirstName(firstName);
+        person.setLastName(lastName);
+        person.setEmail(email);
+        facade.createPerson(person);
         return Response
                 .status(200)
                 .header("Content-Type", "application/json")
-                .entity(new Person())
+                .entity(person)
                 .build();
     }
 
