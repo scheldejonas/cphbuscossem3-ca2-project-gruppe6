@@ -5,9 +5,7 @@ import com.google.gson.graph.GraphAdapterBuilder;
 import control.Facade;
 import entity.Company;
 import entity.Info;
-import entity.Person;
 
-import javax.json.Json;
 import javax.persistence.NoResultException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

@@ -99,7 +99,7 @@ function populateResultContainerWithErrorMessage(errorMessageString) {
             '</div>';
 }
 
-function searchFunction() {
+function searchFunctionPerson() {
     if(searchQuery.value === "" && sel.options[sel.selectedIndex].value === "" || sel.options[sel.selectedIndex].value === "" || searchQuery.value === ""){
         populateResultContainerWithErrorMessage('Please type into the search field before submitting');
         return;
@@ -111,17 +111,6 @@ function searchFunction() {
             '<div class="indeterminate"></div>' +
         '</div>';
 
-    // userDivContainer.innerHTML += "<br /><br /><br /><center><div class='preloader-wrapper big active'>" +
-    //     "<div class='spinner-layer spinner-blue-only'>" +
-    //     "<div class='circle-clipper left'>" +
-    //     "<div class='circle'></div>" +
-    //     "</div><div class='gap-patch'>" +
-    //     "<div class='circle'></div>" +
-    //     "</div><div class='circle-clipper right'>" +
-    //     "<div class='circle'></div>" +
-    //     "</div>" +
-    //     "</div>" +
-    //     "</div></center>";
 
     console.log("Selected value: " + sel.options[sel.selectedIndex].value);
 
@@ -133,16 +122,48 @@ function searchFunction() {
             httpGetPerson("http://localhost:8080/api/person/name/" + searchQuery.value);
             break;
         case "CVR":
-            httpGetCompany("http://localhost:8080/api/company/cvr/" + searchQuery.value);
+            populateResultContainerWithErrorMessage('CVR search not available for person search');
             break;
         case "hobbies":
             httpGetPerson("http://localhost:8080/api/person/hobby/" + searchQuery.value + "?useSSL=false");
             //httpGetHobbies("http://localhost:8080/api/person/hobby/" + searchQuery.value + "?useSSL=false");
             break;
         case "zipcode":
-            //httpGetPerson("http://localhost:8080/api/person/zip/" + searchQuery.value + "?useSSL=false");
+            httpGetPerson("http://localhost:8080/api/person/zip/" + searchQuery.value + "?useSSL=false");
+            break;
+    }
+}
+
+function searchFunctionCompany() {
+    if(searchQuery.value === "" && sel.options[sel.selectedIndex].value === "" || sel.options[sel.selectedIndex].value === "" || searchQuery.value === ""){
+        populateResultContainerWithErrorMessage('Please type into the search field before submitting');
+        return;
+    }
+
+    userDivContainer.innerHTML = '' +
+        '<br />' +
+        '<div class="progress">' +
+        '<div class="indeterminate"></div>' +
+        '</div>';
+
+
+    console.log("Selected value: " + sel.options[sel.selectedIndex].value);
+
+    switch(sel.options[sel.selectedIndex].value){
+        case "phoneNumber":
+            httpGetPerson("http://localhost:8080/api/company/phone/" + searchQuery.value);
+            break;
+        case "personName":
+            httpGetPerson("http://localhost:8080/api/company/name/" + searchQuery.value);
+            break;
+        case "CVR":
+            httpGetCompany("http://localhost:8080/api/company/cvr/" + searchQuery.value);
+            break;
+        case "hobbies":
+            populateResultContainerWithErrorMessage('Company search for hobbies unavailable');
+            break;
+        case "zipcode":
             httpGetCompany("http://localhost:8080/api/company/zip/" + searchQuery.value + "?useSSL=false");
-            //httpGetCity("http://localhost:8080/api/person/zip/" + searchQuery.value + "?useSSL=false");
             break;
     }
 }
