@@ -118,7 +118,7 @@ function searchFunctionPerson() {
         case "phoneNumber":
             httpGetPerson("http://localhost:8080/api/person/phone/" + searchQuery.value);
             break;
-        case "personName":
+        case "name":
             httpGetPerson("http://localhost:8080/api/person/name/" + searchQuery.value);
             break;
         case "CVR":
@@ -153,7 +153,7 @@ function searchFunctionCompany() {
         case "phoneNumber":
             httpGetPerson("http://localhost:8080/api/company/phone/" + searchQuery.value);
             break;
-        case "personName":
+        case "name":
             httpGetPerson("http://localhost:8080/api/company/name/" + searchQuery.value);
             break;
         case "CVR":

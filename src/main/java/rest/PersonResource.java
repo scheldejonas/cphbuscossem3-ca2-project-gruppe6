@@ -164,5 +164,18 @@ public class PersonResource {
         }
         return gson.toJson(jsonArrayNew);
     }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response recievePersonToPersist_AndReturnStatus(@QueryParam("email") String name, @QueryParam("firstName") String firstName, @QueryParam("lastName") String lastName) {
+        
+        return Response
+                .status(200)
+                .header("Content-Type", "application/json")
+                .entity()
+                .build();
+    }
+
     
 }
