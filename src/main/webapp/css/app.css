@@ -19,7 +19,7 @@
 .pad-bottom-20 {
     padding-bottom: 20px;
 }
-#topContainer {
+.divider-line {
     border-bottom: 3px solid #757575;
     border-radius: 2px;
 }
@@ -36,4 +36,8 @@
 
 div#resultUserContainer {
     margin-bottom: 70px;
+}
+
+.margin-bottom-5 {
+    margin-bottom: 5px;
 }

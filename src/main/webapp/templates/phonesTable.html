@@ -9,7 +9,9 @@
         <link type="text/css" rel="stylesheet" href="../css/app.css" media="screen,projection" />
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
+        <link rel="icon"
+              type="image/png"
+              href="/static/images/favicon.png" />
         <title>YellowPages</title>
 
     </head>
@@ -28,7 +30,7 @@
         <div class="container">
 
             <div class="row">
-                <div class="input-field col s4 ">
+                <div class="input-field col s2 ">
                     <select id="selectedOption">
                         <option value="" disabled selected>Choose A Filter</option>
                         <option value="phoneNumber">Phone Number</option>
@@ -39,14 +41,13 @@
                     </select>
                     <label>Filter By</label>
                 </div>
-
-                <div id="resultQuery" class="input-field col s6">
+                <div id="resultQuery" class="input-field col s7">
                     <input id="searchQuery" type="text" />
                     <label for="searchQuery">Search...</label>
                 </div>
-
-                <div class="input-field col s2">
-                    <button id="searchButton" class="btn waves-effect #757575 grey darken-1" type="submit" onclick="searchFunction()">Submit</button>
+                <div class="input-field col s3">
+                    <button id="search-button-person" class="btn waves-effect #757575 grey darken-1 margin-bottom-5" type="submit" onclick="searchFunctionPerson()">Search persons</button>
+                    <button id="search-button-company" class="btn waves-effect #757575 grey darken-1" type="submit" onclick="searchFunctionCompany()">Search companies</button>
                 </div>
             </div>
 
@@ -56,12 +57,10 @@
                 </div>
             </div>
 
-            <br />
+            <div class="divider-line"></div>
 
             <div id="resultUserContainer" class="row">
-
                 <!-- Here the br's will be replaced with both result content and spinners -->
-
             </div>
         </div>
 
