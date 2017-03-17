@@ -139,20 +139,30 @@ function searchFunctionPerson() {
     }
 }
 
+function setLoadBarInResultContainer() {
+    userDivContainer.innerHTML = '' +
+        '<br />' +
+        '<div class="progress">' +
+        '<div class="indeterminate"></div>' +
+        '</div>';
+}
+
+function testThis(placeName, value) {
+    if (placeName === undefined) {
+        placeName = 'not set yet';
+    }
+    console.log('Testing value from ' + placeName + ': ' + value);
+}
+
 function searchFunctionCompany() {
     if(searchQuery.value === "" && sel.options[sel.selectedIndex].value === "" || sel.options[sel.selectedIndex].value === "" || searchQuery.value === ""){
         populateResultContainerWithErrorMessage('Please type into the search field before submitting');
         return;
     }
 
-    userDivContainer.innerHTML = '' +
-        '<br />' +
-        '<div class="progress">' +
-        '<div class="indeterminate"></div>' +
-        '</div>';
+    setLoadBarInResultContainer();
 
-
-    console.log("Selected value: " + sel.options[sel.selectedIndex].value);
+    testThis(sel.options[sel.selectedIndex].value);
 
     switch(sel.options[sel.selectedIndex].value){
         case "phoneNumber":
@@ -185,7 +195,7 @@ function getHobbies() {
 }
 
 function populatedPersonCard(personElement){
-    console.log("Populating cards...");
+    testThis('PopulatedPersonCard', 'Populating cards...')
     var str = "<div class='resultCard col s12 m6'>" +
         "<div class='card blue-grey darken-1'>" +
         "<div class='card-content white-text'>" +
@@ -212,31 +222,35 @@ function populatedCompanyCard(companyElement){
     return str;
 }
 
-function addToUserDivContainer(userArrS){
+function addToPersonDivContainer(userArrS){
     var str = "";
     if (userArrS.length == undefined) {
         str += populatedPersonCard(userArrS);
-        console.log("Adding single person: " + str);
-        return str;
+        testThis('Adding single person', str);
+        userDivContainer.innerHTML = str;
+        return;
     }
     for(var i = 0; i<userArrS.length; i++){
         console.log("Working with object " + (i + 1) + "/" + userArrS.length);
         str += populatedPersonCard(userArrS[i]);
     }
-    return str;
+    userDivContainer.innerHTML = str;
+    return;
 }
 
 function addToCompanyDivContainer(userArrS){
     var str = "";
     if (userArrS.length == undefined) {
         str += populatedCompanyCard(userArrS);
-        console.log("Adding single company: " + str);
+        testThis('Adding single company', str);
+        userDivContainer.innerHTML = str;
         return str;
     }
     for(var i = 0; i<userArrS.length; i++){
-        console.log("Working with object " + (i + 1) + "/" + userArrS.length);
+        testThis("Working with object", (i + 1) + "/" + userArrS.length);
         str += populatedCompanyCard(userArrS[i]);
     }
+    userDivContainer.innerHTML = str;
     return str;
 }
 
@@ -247,7 +261,7 @@ function populatePersonContainer(){
         populateResultContainerWithErrorMessage('There was unfortunatly no content to retrieve on your search');
         return;
     }
-    userDivContainer.innerHTML += addToUserDivContainer(userArr);
+    addToPersonDivContainer(userArr);
 }
 
 function populateCompanyContainer(){
@@ -256,7 +270,7 @@ function populateCompanyContainer(){
         populateResultContainerWithErrorMessage('There was unfortunatly no content to retrieve on your search');
         return;
     }
-    userDivContainer.innerHTML += addToCompanyDivContainer(userArr);
+    addToCompanyDivContainer(userArr);
 }
 
 function getAllHobbiesToText(hobbyArr){
@@ -368,31 +382,3 @@ function httpGetCompanyAsync(theUrl){
         async: false,
     });
 }
-
-// var xhrPostPerson = new XMLHttpRequest();
-//
-// function sendPersonToServer() {
-//     xhrPostPerson.onreadystatechange = function() {
-//         if (xhrPostPerson.readyState === 4 && xhrPostPerson.status === 200) {
-//             // var table = document.querySelector('.table');
-//             // console.log(table);
-//             // var tableBody = document.querySelector('.tableBody');
-//             // console.log(tableBody);
-//             var dataObjectModel = JSON.parse(xhrPostPerson.responseText);
-//
-//             // console.log(dataObjectModel);
-//             // var tableBodyHtml = '';
-//             // for (var i = 0; i < dataObjectModel.length; i += 1) {
-//             //     tableBodyHtml += '<tr>';
-//             //     for (var property in dataObjectModel[i]) {
-//             //         tableBodyHtml += '<td>' + dataObjectModel[i][property] + '</td>';
-//             //     }
-//             //     tableBodyHtml += '</tr>';
-//             // }
-//             // console.log(tableBodyHtml);
-//             // tableBody.innerHTML = tableBodyHtml;
-//         }
-//     }
-//     xhrPostPerson.open('POST', 'http://localhost:8080/api/person/phone/123124?useSSL=false');
-//     xhrPostPerson.send();
-// }

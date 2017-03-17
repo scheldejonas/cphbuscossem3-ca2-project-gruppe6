@@ -3,6 +3,8 @@ package rest;
 import com.google.gson.*;
 import com.google.gson.graph.GraphAdapterBuilder;
 import control.Facade;
+import entity.Address;
+import entity.CityInfo;
 import entity.Info;
 import entity.Person;
 import errorhandling.ServerException;
@@ -170,16 +172,25 @@ public class PersonResource {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON)
     public Response recievePersonToPersist_AndReturnStatus(@FormParam("email") String email, @FormParam("firstName") String firstName, @FormParam("lastName") String lastName) throws ServerException{
+        test("Recieved parameters", email + firstName + lastName);
         Person person = new Person();
         person.setFirstName(firstName);
         person.setLastName(lastName);
         person.setEmail(email);
+        person.setAddress(facade.getAddressById(1));
         facade.createPerson(person);
+        Gson gson = getGraphBuilder();
+        String personInJsonStringWithAllCombinations = gson.toJson(facade.getPersonByID("" +person.getId()));
+        String personInJsonWithOnlyFirstCombination = formatSingleJSON(personInJsonStringWithAllCombinations);
         return Response
                 .status(200)
                 .header("Content-Type", "application/json")
-                .entity(gson.toJson((Person)person, Person.class))
+                .entity(personInJsonWithOnlyFirstCombination)
                 .build();
     }
-    
+
+    private void test(String place, String testValue) {
+        System.out.println(place + ": " + testValue);
+    }
+
 }

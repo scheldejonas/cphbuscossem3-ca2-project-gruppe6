@@ -2,6 +2,7 @@ package control;
 
 
 import config.DataConfig;
+import dao.AddressDao;
 import dao.CompanyDao;
 import dao.CityInfoDao;
 import dao.PersonDao;
@@ -24,6 +25,7 @@ public class Facade {
     private PersonDao personDao;
     private CompanyDao companyDao;
     private CityInfoDao cityDao;
+    private AddressDao addressDao;
 
     private Facade() {
         EntityManagerFactory factory = DataConfig.getSingleton().getEntityManagerFactory();
@@ -31,6 +33,7 @@ public class Facade {
         personDao = new PersonDao(manager);
         companyDao = new CompanyDao(manager);
         cityDao = new CityInfoDao(manager);
+        addressDao = new AddressDao(manager);
     }
 
     public static Facade getSingleton() {
@@ -131,5 +134,9 @@ public class Facade {
 
     public void createPerson(Person person) throws ServerException{
         personDao.createPerson(person);
+    }
+
+    public Address getAddressById(int addressId) {
+        return addressDao.getById(addressId);
     }
 }

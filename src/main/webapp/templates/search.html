@@ -30,7 +30,7 @@
         <div class="container">
 
             <div class="row">
-                <div class="input-field col s2 ">
+                <div class="input-field col s3 ">
                     <select id="selectedOption">
                         <option value="" disabled selected>Choose A Filter</option>
                         <option value="phoneNumber">Phone number</option>
@@ -41,7 +41,7 @@
                     </select>
                     <label>Filter By</label>
                 </div>
-                <div id="resultQuery" class="input-field col s6">
+                <div id="resultQuery" class="input-field col s5">
                     <input id="searchQuery" type="text" />
                     <label for="searchQuery">Search...</label>
                 </div>
@@ -54,7 +54,7 @@
 
             <div class="row">
                 <div id="topContainer" class="col s4">
-                    <h5>Results:</h5>
+                    <h5 class="">Results:</h5>
                 </div>
                 <div class="col s8 right right-align">
                     <!-- Modal Trigger -->
@@ -94,47 +94,50 @@
 
         <!-- Modal New Person -->
         <div id="modal1" class="modal modal-fixed-footer">
-            <div class="modal-content">
+            <div id="divNewPersonInModal" class="modal-content">
 
                 <h4>New Person</h4>
 
-                <form method="POST" action="../api/person?useSSL=false" accept-charset="UTF-8">
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input id="per_firstname" name="firstName" type="text" class="validate">
-                            <label for="per_firstname">First Name</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <i class="material-icons prefix">verified_user</i>
-                            <input id="per_lastname" name="lastName" type="tel" class="validate">
-                            <label for="per_lastname">Last Name</label>
-                        </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="per_firstname" name="firstName" type="text" class="validate">
+                        <label for="per_firstname">First Name</label>
                     </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <i class="material-icons prefix">email</i>
-                            <input id="per_email" name="email" type="email" class="validate">
-                            <label for="per_email">Email</label>
-                        </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">verified_user</i>
+                        <input id="per_lastname" name="lastName" type="tel" class="validate">
+                        <label for="per_lastname">Last Name</label>
                     </div>
-                    <button class="btn waves-effect waves-light" type="submit">Submit
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">email</i>
+                        <input id="per_email" name="email" type="email" class="validate">
+                        <label for="per_email">Email</label>
+                    </div>
+                </div>
+                <a href="#!" class="modal-close modal-action">
+                    <button id="submitButtonInFormNewPersonModal" class="btn waves-effect waves-light">
+                        Submit
                         <i class="material-icons right">send</i>
                     </button>
-                </form>
+                </a>
+
             </div>
 
             <div class="modal-footer">
                 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
             </div>
         </div>
+        <!-- Modal New Person End -->
 
 
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="../js/materialize.min.js"></script>
         <script type="text/javascript" src="../js/scripts.js"></script>
-        <!--<script type="text/javascript" src="../js/TablePopulator.js"></script>-->
+        <script type="text/javascript" src="../js/new-person-modal.js"></script>
 
     </body>
 </html>
