@@ -4,6 +4,7 @@ import config.DataConfig;
 import entity.CityInfo;
 import entity.Person;
 import entity.Phone;
+import errorhandling.ServerException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -62,10 +63,13 @@ public class PersonDao {
         return (CityInfo) q.getSingleResult();
     }
 
-    public void EditObjectInDatabase(Object o) {
-        manager.getTransaction().begin();
-        manager.merge(o);
-        manager.getTransaction().commit();
+    public void createPerson(Person person) throws ServerException {
+        try {
+            manager.getTransaction().begin();
+            manager.persist(person);
+            manager.getTransaction().commit();
+        } catch (Exception exception) {
+            manager.getTransaction().rollback();
+            throw new ServerException();
     }
-
 }

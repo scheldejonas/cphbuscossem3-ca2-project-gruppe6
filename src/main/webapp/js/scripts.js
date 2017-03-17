@@ -363,3 +363,31 @@ function httpGetCompanyAsync(theUrl){
         async: false,
     });
 }
+
+// var xhrPostPerson = new XMLHttpRequest();
+//
+// function sendPersonToServer() {
+//     xhrPostPerson.onreadystatechange = function() {
+//         if (xhrPostPerson.readyState === 4 && xhrPostPerson.status === 200) {
+//             // var table = document.querySelector('.table');
+//             // console.log(table);
+//             // var tableBody = document.querySelector('.tableBody');
+//             // console.log(tableBody);
+//             var dataObjectModel = JSON.parse(xhrPostPerson.responseText);
+//
+//             // console.log(dataObjectModel);
+//             // var tableBodyHtml = '';
+//             // for (var i = 0; i < dataObjectModel.length; i += 1) {
+//             //     tableBodyHtml += '<tr>';
+//             //     for (var property in dataObjectModel[i]) {
+//             //         tableBodyHtml += '<td>' + dataObjectModel[i][property] + '</td>';
+//             //     }
+//             //     tableBodyHtml += '</tr>';
+//             // }
+//             // console.log(tableBodyHtml);
+//             // tableBody.innerHTML = tableBodyHtml;
+//         }
+//     }
+//     xhrPostPerson.open('POST', 'http://localhost:8080/api/person/phone/123124?useSSL=false');
+//     xhrPostPerson.send();
+// }
