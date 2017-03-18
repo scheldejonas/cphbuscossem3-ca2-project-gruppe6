@@ -13,7 +13,7 @@ $(document).ready(function(){
 
 document.getElementById("searchQuery").addEventListener("keydown", function(event) {
     if (event.keyCode == 13) {
-        searchFunction();
+        searchFunctionPerson();
     }
 });
 
@@ -121,20 +121,19 @@ function searchFunctionPerson() {
 
     switch(sel.options[sel.selectedIndex].value){
         case "phoneNumber":
-            httpGetPerson("http://localhost:8080/api/person/phone/" + searchQuery.value);
+            httpGetPerson("https://viter.dk/yellowpages/api/person/phone/" + searchQuery.value);
             break;
         case "name":
-            httpGetPerson("http://localhost:8080/api/person/name/" + searchQuery.value);
+            httpGetPerson("https://viter.dk/yellowpages/api/person/name/" + searchQuery.value);
             break;
         case "CVR":
             populateResultContainerWithErrorMessage('CVR search not available for person search');
             break;
         case "hobbies":
-            httpGetPerson("http://localhost:8080/api/person/hobby/" + searchQuery.value + "?useSSL=false");
-            //httpGetHobbies("http://localhost:8080/api/person/hobby/" + searchQuery.value + "?useSSL=false");
+            httpGetPerson("https://viter.dk/yellowpages/api/person/hobby/" + searchQuery.value + "?useSSL=true");
             break;
         case "zipcode":
-            httpGetPerson("http://localhost:8080/api/person/zip/" + searchQuery.value + "?useSSL=false");
+            httpGetPerson("https://viter.dk/yellowpages/api/person/zip/" + searchQuery.value + "?useSSL=true");
             break;
     }
 }
@@ -166,19 +165,19 @@ function searchFunctionCompany() {
 
     switch(sel.options[sel.selectedIndex].value){
         case "phoneNumber":
-            httpGetPerson("http://localhost:8080/api/company/phone/" + searchQuery.value);
+            httpGetCompany("https://viter.dk/yellowpages/api/company/phone/" + searchQuery.value);
             break;
         case "name":
-            httpGetPerson("http://localhost:8080/api/company/name/" + searchQuery.value);
+            httpGetCompany("https://viter.dk/yellowpages/api/company/name/" + searchQuery.value);
             break;
         case "CVR":
-            httpGetCompany("http://localhost:8080/api/company/cvr/" + searchQuery.value);
+            httpGetCompany("https://viter.dk/yellowpages/api/company/cvr/" + searchQuery.value);
             break;
         case "hobbies":
             populateResultContainerWithErrorMessage('Company search for hobbies unavailable');
             break;
         case "zipcode":
-            httpGetCompany("http://localhost:8080/api/company/zip/" + searchQuery.value + "?useSSL=false");
+            httpGetCompany("https://viter.dk/yellowpages/api/company/zip/" + searchQuery.value + "?useSSL=true");
             break;
     }
 }

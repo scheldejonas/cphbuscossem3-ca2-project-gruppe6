@@ -27,7 +27,7 @@ function sendPersonAsJsonToServer(email, firstName, lastName) {
                 testThis('error on post ajax','I did not got the created person back from the server');
         }
     }
-    xhrPostPersonRequest.open('POST', 'http://localhost:8080/api/person?useSSL=false');
+    xhrPostPersonRequest.open('POST', 'http://viter.dk/yellowpages/api/person?useSSL=true');
     xhrPostPersonRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhrPostPersonRequest.send(postBodyWithValues);
 }
