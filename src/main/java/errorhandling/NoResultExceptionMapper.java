@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import javax.persistence.NoResultException;
 
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -16,12 +17,15 @@ public class NoResultExceptionMapper implements ExceptionMapper<NoResultExceptio
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @Override
+    @Produces(MediaType.APPLICATION_JSON)
     public Response toResponse(NoResultException exception)
     {
-        int statusCode = 204;
-        String msg = "Requested resource does not exist. No content";
+        int statusCode = Response.Status.NO_CONTENT.getStatusCode();
+        String msg = exception.getMessage();
         ErrorMessage err = new ErrorMessage(msg, statusCode, exception.getStackTrace());
-        Response res = Response.status(statusCode).entity(gson.toJson(err)).type(MediaType.APPLICATION_JSON).build();
-        return res;
+        return Response
+                .ok()
+                .entity(gson.toJson(err))
+                .build();
     }
 }

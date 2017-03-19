@@ -2,6 +2,9 @@
  * Created by William Pfaffe on 15-03-2017.
  */
 
+var appURN = 'https://viter.dk/yellowpages';
+var useSSLQueryStringParameter = '?useSSL=true';
+
 $(document).ready(function() {
     $('select').material_select();
 });
@@ -98,6 +101,8 @@ var userDivContainer = document.getElementById("resultUserContainer");
 
 function populateResultContainerWithErrorMessage(errorMessageString) {
         userDivContainer.innerHTML = '' +
+            '</br>' +
+            '</br>' +
             '<div class="col s12 center">' +
                 '<i class="large material-icons">error_outline</i>' +
                 '<p>' + errorMessageString + '</p>' +
@@ -121,19 +126,19 @@ function searchFunctionPerson() {
 
     switch(sel.options[sel.selectedIndex].value){
         case "phoneNumber":
-            httpGetPerson("https://viter.dk/yellowpages/api/person/phone/" + searchQuery.value);
+            httpGetPerson(appURN + '/api/person/phone/' + searchQuery.value + useSSLQueryStringParameter);
             break;
         case "name":
-            httpGetPerson("https://viter.dk/yellowpages/api/person/name/" + searchQuery.value);
+            httpGetPerson(appURN + '/api/person/name/' + searchQuery.value + useSSLQueryStringParameter);
             break;
         case "CVR":
-            populateResultContainerWithErrorMessage('CVR search not available for person search');
+            populateResultContainerWithErrorMessage('CVR search is existing on a person');
             break;
         case "hobbies":
-            httpGetPerson("https://viter.dk/yellowpages/api/person/hobby/" + searchQuery.value + "?useSSL=true");
+            httpGetPerson(appURN + '/api/person/hobby/' + searchQuery.value + useSSLQueryStringParameter);
             break;
         case "zipcode":
-            httpGetPerson("https://viter.dk/yellowpages/api/person/zip/" + searchQuery.value + "?useSSL=true");
+            httpGetPerson(appURN + '/api/person/zip/' + searchQuery.value + useSSLQueryStringParameter);
             break;
     }
 }
@@ -165,31 +170,20 @@ function searchFunctionCompany() {
 
     switch(sel.options[sel.selectedIndex].value){
         case "phoneNumber":
-            httpGetCompany("https://viter.dk/yellowpages/api/company/phone/" + searchQuery.value);
+            httpGetCompany(appURN + '/api/company/phone/' + searchQuery.value + useSSLQueryStringParameter);
             break;
         case "name":
-            httpGetCompany("https://viter.dk/yellowpages/api/company/name/" + searchQuery.value);
+            httpGetCompany(appURN + '/api/company/name/' + searchQuery.value + useSSLQueryStringParameter);
             break;
         case "CVR":
-            httpGetCompany("https://viter.dk/yellowpages/api/company/cvr/" + searchQuery.value);
+            httpGetCompany(appURN + '/api/company/cvr/' + searchQuery.value + useSSLQueryStringParameter);
             break;
         case "hobbies":
-            populateResultContainerWithErrorMessage('Company search for hobbies unavailable');
+            populateResultContainerWithErrorMessage('Companys does not have hobbies');
             break;
         case "zipcode":
-            httpGetCompany("https://viter.dk/yellowpages/api/company/zip/" + searchQuery.value + "?useSSL=true");
+            httpGetCompany(appURN + '/api/company/zip/' + searchQuery.value + useSSLQueryStringParameter);
             break;
-    }
-}
-
-function getHobbies() {
-    var hobbies = "";
-    for(var i = 0; i < userArr.length; i++){
-        for(var p in userArr[0]){
-            for(var k = 0; k<userArr[i][p].hobbies.length; k++){
-                hobbies += userArr[i][p].hobbies[k].name + ", ";
-            }
-        }
     }
 }
 
@@ -225,12 +219,12 @@ function addToPersonDivContainer(userArrS){
     var str = "";
     if (userArrS.length == undefined) {
         str += populatedPersonCard(userArrS);
-        testThis('Adding single person', str);
+        testThis('addToPersonDivContainer', str);
         userDivContainer.innerHTML = str;
         return;
     }
     for(var i = 0; i<userArrS.length; i++){
-        console.log("Working with object " + (i + 1) + "/" + userArrS.length);
+        testThis('addToPersonDivContainer',"Working with object " + (i + 1) + "/" + userArrS.length);
         str += populatedPersonCard(userArrS[i]);
     }
     userDivContainer.innerHTML = str;
@@ -241,12 +235,12 @@ function addToCompanyDivContainer(userArrS){
     var str = "";
     if (userArrS.length == undefined) {
         str += populatedCompanyCard(userArrS);
-        testThis('Adding single company', str);
+        testThis('addToCompanyDivContainer', str);
         userDivContainer.innerHTML = str;
         return str;
     }
     for(var i = 0; i<userArrS.length; i++){
-        testThis("Working with object", (i + 1) + "/" + userArrS.length);
+        testThis('addToCompanyDivContainer', (i + 1) + "/" + userArrS.length);
         str += populatedCompanyCard(userArrS[i]);
     }
     userDivContainer.innerHTML = str;
@@ -255,18 +249,19 @@ function addToCompanyDivContainer(userArrS){
 
 function populatePersonContainer(){
     userDivContainer.innerHTML = '';
-    // console.log('Length of retrieved user array' + userArr.length);
+    testThis('populateCompanyContainer', userArr[0] + userArr[1]);
     if (userArr.length === 0) {
-        populateResultContainerWithErrorMessage('There was unfortunatly no content to retrieve on your search');
+        populateResultContainerWithErrorMessage('There was unfortunatly no content people on your search');
         return;
     }
     addToPersonDivContainer(userArr);
 }
 
-function populateCompanyContainer(){
+function populateCompanyContainer() {
     userDivContainer.innerHTML = '';
+    testThis('populateCompanyContainer', userArr[0] + userArr[1]);
     if (userArr.length === 0) {
-        populateResultContainerWithErrorMessage('There was unfortunatly no content to retrieve on your search');
+        populateResultContainerWithErrorMessage('There was unfortunatly no content companies on your search');
         return;
     }
     addToCompanyDivContainer(userArr);
@@ -276,7 +271,7 @@ function getAllHobbiesToText(hobbyArr){
     console.log("Loading Hobbies: " + hobbyArr.length);
     var hobbyString = "";
     for(var i = 0; i<hobbyArr.length; i++){
-        console.log("Current hobby being worked on is: " + hobbyArr[i].name);
+        testThis('getAllHobbiesToText',"Current hobby being worked on is: " + hobbyArr[i].name);
         hobbyString += hobbyArr[i].name + ", ";
     }
 
@@ -291,7 +286,7 @@ function getAllPhonesToText(phonesArr){
     console.log("Loading Phones: " + phonesArr.length);
     var phoneString = "";
     for(var i = 0; i<phonesArr.length; i++){
-        console.log("Current phone number being worked on is: " + phonesArr[i].name);
+        testThis('getAllPhonesToText',"Current phone number being worked on is: " + phonesArr[i].name);
         phoneString += phonesArr[i].number + ", ";
     }
 
@@ -302,82 +297,105 @@ function getAllPhonesToText(phonesArr){
     return phoneString.substring(0, phoneString.length-2);
 }
 
-function populatePersonContainerHobbies(){
-    var userDivContainer = document.getElementById("resultUserContainer");
-    userDivContainer.innerHTML = "";
-    for(var i = 0; i < userArr.length; i++){
-        for(var p in userArr[0]){
-            userDivContainer.innerHTML += "<div class='col s6 m5'><div class='card-panel #757575 grey darken-1'><span class='white-text'>First Name: " + userArr[i][p].firstName + "<br /> Last Name: " + userArr[i][p].lastName + "<br />Phone Number: " + userArr[i][p].phones[0].number + "<br />Hobbies: " + "NOT WORKING" + "<br /></span></div></div>";
-        }
-    }
-}
-
-function populateCardsAllCities(){
-    var userDivContainer = document.getElementById("resultUserContainer");
-    userDivContainer.innerHTML = "";
-    for(var i = 0; i< allCities["0x1"].length; i++) {
-        userDivContainer.innerHTML += "Zipcodes: " + allCities["0x1"][i].zipCode + "<br /><br />";
-    }
-}
-
-function httpGetCity(theUrl){
-    userArr = [];
-    $.get(
-        theUrl,
-        function(data) {
-            console.log("Hej vi læser data");
-            userArr = data;
-            populatePersonContainer();
-        }
-    );
-}
-
-function httpGetPhone(theUrl){
-    userArr = [];
-    $.get(
-        theUrl,
-        function(data) {
-            userArr = data;
-            populatePersonContainer();
-        }
-    );
-}
-
 function httpGetPerson(theUrl){
     userArr = [];
-    $.get(
-        theUrl,
-        function(data) {
-            userArr = data;
+    var xhrGetPerson = new XMLHttpRequest();
+    xhrGetPerson.onreadystatechange = function () {
+        if (xhrGetPerson.readyState === 4 && xhrGetPerson.status === 200) {
+            userArr = JSON.parse(xhrGetPerson.responseText);
+            if (userArr['code'] === 204) {
+                populateResultContainerWithErrorMessage('Unfortunatly there was no people for this search');
+                return;
+            }
+            if (userArr['code'] === 404) {
+                populateResultContainerWithErrorMessage('We are sorry, it seems the server does not have this api option yet');
+                return;
+            }
+            if (userArr['code'] === 500) {
+                populateResultContainerWithErrorMessage('We are very sorry to inform, that our server had a problem fetching' +
+                    'you content</br>' +
+                    'Please try again');
+                return;
+            }
             populatePersonContainer();
+            return;
         }
-    );
+        if (xhrGetPerson.readyState === 4 && xhrGetPerson.status === 204) {
+            populateResultContainerWithErrorMessage('Unfortunatly there was no people for this search');
+            return;
+        }
+        if (xhrGetPerson.readyState === 4 && xhrGetPerson.status === 404) {
+            populateResultContainerWithErrorMessage('We are sorry, it seems the server does not have this api option yet');
+            return;
+        }
+        if (xhrGetPerson.readyState === 4 && xhrGetPerson.status === 500) {
+            populateResultContainerWithErrorMessage('We are very sorry to inform, that our server had a problem fetching ' +
+                'your content</br>' +
+                'Please try again');
+            return;
+        }
+    };
+    xhrGetPerson.open('GET', theUrl);
+    xhrGetPerson.setRequestHeader('Content-Type', 'application/json');
+    xhrGetPerson.send();
 }
 
 function httpGetCompany(theUrl){
     userArr = [];
-    $.get(
-        theUrl,
-        function(data) {
-            userArr = data;
+    var xhrGetCompany = new XMLHttpRequest();
+    xhrGetCompany.onreadystatechange = function () {
+        if (xhrGetCompany.readyState === 4 && xhrGetCompany.status === 200) {
+            userArr = JSON.parse(xhrGetCompany.responseText);
+            if (userArr['code'] === 204) {
+                populateResultContainerWithErrorMessage('Unfortunatly there was no companies for this search');
+                return;
+            }
+            if (userArr['code'] === 404) {
+                populateResultContainerWithErrorMessage('We are sorry, it seems the server does not have this api option yet');
+                return;
+            }
+            if (userArr['code'] === 500) {
+                populateResultContainerWithErrorMessage('We are very sorry to inform, that our server had a problem fetching' +
+                    'you content</br>' +
+                    'Please try again');
+                return;
+            }
             populateCompanyContainer();
+            return;
         }
-    );
+        if (xhrGetCompany.readyState === 4 && xhrGetCompany.status === 204) {
+            populateResultContainerWithErrorMessage('Unfortunatly there was no companies for this search');
+            return;
+        }
+        if (xhrGetCompany.readyState === 4 && xhrGetCompany.status === 404) {
+            populateResultContainerWithErrorMessage('We are sorry, it seems the server does not have this api option yet');
+            return;
+        }
+        if (xhrGetCompany.readyState === 4 && xhrGetCompany.status === 500) {
+            populateResultContainerWithErrorMessage('We are very sorry to inform, that our server had a problem fetching ' +
+                'your content</br>' +
+                'Please try again');
+            return;
+        }
+    };
+    xhrGetCompany.open('GET', theUrl);
+    xhrGetCompany.setRequestHeader('Content-Type', 'application/json');
+    xhrGetCompany.send();
 }
 
-function httpGetCompanyAsync(theUrl){
-    userArr = [];
-    console.log("Running getCompany From CVR");
-    $.ajax({
-        url: theUrl,
-        success: function (data) {
-            //console.log("Success parsing company from CVR! " + data.toString());
-            userArr = data;
-            populateCompanyContainer();
-        },
-        error: function (jqXHR, exception) {
-            console.log('Uncaught Error.\n' + jqXHR.responseText);
-        },
-        async: false,
-    });
-}
+// function httpGetCompanyAsync(theUrl){
+//     userArr = [];
+//     console.log("Running getCompany From CVR");
+//     $.ajax({
+//         url: theUrl,
+//         success: function (data) {
+//             //console.log("Success parsing company from CVR! " + data.toString());
+//             userArr = data;
+//             populateCompanyContainer();
+//         },
+//         error: function (jqXHR, exception) {
+//             console.log('Uncaught Error.\n' + jqXHR.responseText);
+//         },
+//         async: false,
+//     });
+// }

@@ -5,6 +5,7 @@ import com.google.gson.graph.GraphAdapterBuilder;
 import control.Facade;
 import entity.Company;
 import entity.Info;
+import errorhandling.ServerException;
 
 import javax.persistence.NoResultException;
 import javax.ws.rs.GET;
@@ -42,8 +43,7 @@ public class CompanyResource {
             throw new NoResultException("No company from zip code: " + zipCode + " was found!");
         }
         return Response
-                .status(200)
-                .header("Content-Type", "application/json")
+                .status(Response.Status.OK)
                 .entity(formatted)
                 .build();
     }
@@ -60,8 +60,7 @@ public class CompanyResource {
             throw new NoResultException("No company from address: " + address + " was found!");
         }
         return Response
-                .status(200)
-                .header("Content-Type", "application/json")
+                .status(Response.Status.OK)
                 .entity(formatted)
                 .build();
     }
@@ -78,8 +77,7 @@ public class CompanyResource {
             throw new NoResultException("No company with phone: " + phoneNo + " was found!");
         }
         return Response
-                .status(200)
-                .header("Content-Type", "application/json")
+                .status(Response.Status.OK)
                 .entity(formatted)
                 .build();
     }
@@ -96,8 +94,7 @@ public class CompanyResource {
             throw new NoResultException("No company with CVR: " + cvr + " was found!");
         }
         return Response
-                .status(200)
-                .header("Content-Type", "application/json")
+                .status(Response.Status.OK)
                 .entity(formatted)
                 .build();
     }
@@ -105,17 +102,17 @@ public class CompanyResource {
     @GET
     @Path("/name/{name}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCompanyFromName(@PathParam("name") String name){
+    public Response getCompanyFromName(@PathParam("name") String name) throws ServerException {
         Gson gson = getGraphBuilder();
         Company company = facade.findCompanyFromName(name);
         String s = gson.toJson(company, Company.class);
         String formatted = formatSingleJSON(s);
         if (formatted.isEmpty() || formatted.equals("")) {
-            throw new NoResultException("No company with name: " + name + " was found!");
+//            throw new NoResultException("No company with name: " + name + " was found!");
+            throw new ServerException("No company with name: " + name + " was found!");
         }
         return Response
-                .status(200)
-                .header("Content-Type", "application/json")
+                .status(Response.Status.OK)
                 .entity(formatted)
                 .build();
     }

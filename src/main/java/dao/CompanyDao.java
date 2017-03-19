@@ -14,12 +14,6 @@ public class CompanyDao {
     public CompanyDao(EntityManager manager) {
         this.manager = manager;
     }
-
-    public CityInfo findSingleCity(String zipCode) {
-        Query q = manager.createQuery("SELECT i FROM CityInfo i WHERE i.zipCode = :zipCode");
-        q.setParameter("zipCode", zipCode);
-        return (CityInfo) q.getSingleResult();
-    }
     
     public Company findCompanyFromName(String name) {
         Query q = manager.createQuery("SELECT c FROM Company c WHERE c.name = :name");

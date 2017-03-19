@@ -15,19 +15,29 @@ function sendPersonAsJsonToServer(email, firstName, lastName) {
      * This method is making updating the result container, through scripts, as soon as the JSON of the person is returned
      */
     xhrPostPersonRequest.onreadystatechange = function() {
-        if (xhrPostPersonRequest.readyState === 4 && xhrPostPersonRequest.status === 200) {
+        if (xhrPostPersonRequest.readyState === 4) {
             var personAsJsonFromPostRequest = JSON.parse(xhrPostPersonRequest.responseText)
-                testThis('returned object from post ajax',personAsJsonFromPostRequest);
+            if (personAsJsonFromPostRequest['code'] === 204) {
+                populateResultContainerWithErrorMessage('Unfortunatly your person did not got created the right way ' +
+                    'Please try again');
+                return;
+            }
+            if (personAsJsonFromPostRequest['code'] === 500) {
+                populateResultContainerWithErrorMessage('When we tried to create your newly typed in person,' +
+                    'there unfortunatly happened an error');
+                return;
+            }
+            testThis('sendPersonAsJsonToServer.onreadystatechange', personAsJsonFromPostRequest);
             addToPersonDivContainer(personAsJsonFromPostRequest);
-                testThis('succes on post ajax','I succesfully received the created person');
         }
+        testThis('sendPersonAsJsonToServer.onreadystatechange', xhrPostPersonRequest.status);
         if (xhrPostPersonRequest.readyState === 4 && xhrPostPersonRequest.status === 500) {
             populateResultContainerWithErrorMessage('When we tried to create your newly typed in person,' +
                 'there unfortunatly happened an error');
-                testThis('error on post ajax','I did not got the created person back from the server');
+            return;
         }
-    }
-    xhrPostPersonRequest.open('POST', 'http://viter.dk/yellowpages/api/person?useSSL=true');
+    };
+    xhrPostPersonRequest.open('POST', appURN + '/api/person' + useSSLQueryStringParameter);
     xhrPostPersonRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhrPostPersonRequest.send(postBodyWithValues);
 }
@@ -41,7 +51,12 @@ submitButtonInFormNewPersonModal.addEventListener('click', (event) => {
     var firstName = inputFields['firstName'].value;
     var lastName = inputFields['lastName'].value;
     var email = inputFields['email'].value;
-        testThis('eventlistener for submit button', firstName + lastName + email);
     sendPersonAsJsonToServer(email, firstName, lastName);
+    inputFields['firstName'].value = '';
+    inputFields['lastName'].value = '';
+    inputFields['email'].value = '';
+    $(document).ready(function() {
+        Materialize.updateTextFields();
+    });
 });
 

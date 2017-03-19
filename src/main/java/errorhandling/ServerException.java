@@ -2,12 +2,9 @@ package errorhandling;
 
 public class ServerException extends Exception {
 
-    public ServerException() {
-        super("Server Error");
-    }
+    private static final long serialVersionUID = 1L;
 
     public ServerException(String message) {
         super(message);
     }
-
 }

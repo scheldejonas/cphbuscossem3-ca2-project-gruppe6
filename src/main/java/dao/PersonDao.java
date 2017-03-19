@@ -82,7 +82,7 @@ public class PersonDao
         } catch (Exception exception)
         {
             manager.getTransaction().rollback();
-            throw new ServerException();
+            throw new ServerException("It was not possible to create this person");
         }
     }
 }

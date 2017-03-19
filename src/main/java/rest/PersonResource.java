@@ -39,8 +39,7 @@ public class PersonResource {
             throw new NoResultException("No person from zip code: " + zipCode + " was found!");
         }
         return Response
-                .status(200)
-                .header("Content-Type", "application/json")
+                .status(Response.Status.OK)
                 .entity(formatted)
                 .build();
     }
@@ -57,8 +56,7 @@ public class PersonResource {
             throw new NoResultException("No person with hobby: " + hobby + " was found!");
         }
         return Response
-                .status(200)
-                .header("Content-Type", "application/json")
+                .status(Response.Status.OK)
                 .entity(formatted)
                 .build();
     }
@@ -75,8 +73,7 @@ public class PersonResource {
             throw new NoResultException("No person with number: " + phoneNo + " was found!");
         }
         return Response
-                .status(200)
-                .header("Content-Type", "application/json")
+                .status(Response.Status.OK)
                 .entity(formatted)
                 .build();
     }
@@ -92,8 +89,7 @@ public class PersonResource {
             throw new NoResultException("No person from address: " + address + " was found!");
         }
         return Response
-                .status(200)
-                .header("Content-Type", "application/json")
+                .status(Response.Status.OK)
                 .entity(formatted)
                 .build();
     }
@@ -105,12 +101,8 @@ public class PersonResource {
         Gson gson = getGraphBuilder();
         String s = gson.toJson(facade.findPeopleFromName(name), ArrayList.class);
         String formatted = getFormattedJSON(s);
-        if (formatted.isEmpty() || formatted.equals("")) {
-            throw new NoResultException("No person with name: " + name + " was found!");
-        }
         return Response
-                .status(200)
-                .header("Content-Type", "application/json")
+                .status(Response.Status.OK)
                 .entity(formatted)
                 .build();
     }
@@ -128,8 +120,7 @@ public class PersonResource {
             throw new NoResultException("No person with id: " + id + " was found!");
         }
         return Response
-                .status(200)
-                .header("Content-Type", "application/json")
+                .status(Response.Status.OK)
                 .entity(formatted)
                 .build();
     }
@@ -183,8 +174,7 @@ public class PersonResource {
         String personInJsonStringWithAllCombinations = gson.toJson(facade.getPersonByID("" +person.getId()));
         String personInJsonWithOnlyFirstCombination = formatSingleJSON(personInJsonStringWithAllCombinations);
         return Response
-                .status(200)
-                .header("Content-Type", "application/json")
+                .status(Response.Status.CREATED)
                 .entity(personInJsonWithOnlyFirstCombination)
                 .build();
     }
